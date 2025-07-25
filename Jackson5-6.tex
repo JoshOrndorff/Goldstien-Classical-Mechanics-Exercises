@@ -1,0 +1,43 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{J.D. Jackson Problem 5.6}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+To begin I'll find the $B$-field due to a cylindrical conductor of radius $a$ that does \textit{not} have a hole bored in it.
+\begin{equation}
+\oint \mathbf{B_a} \cdot\mathrm{d}\mathbf{l} = \mu_0I_{enc}
+\end{equation}
+
+We know by symmetry that the $B$-field would be equal in magnitude, so it can come out of the integral, and we obtain a familiar result.
+\begin{equation}
+B_a=\frac{\mu_0}{2}jr
+\end{equation}
+
+In full vector notation, we use the right hand rule to obtain
+\begin{equation}
+\mathbf{B_a}=\frac{\mu_0}{2}(\mathbf{j}\times\mathbf{r})
+\end{equation}
+
+By the same logic we see that the $B$-field from \textit{only} a conducting cylinder of radius $b$ a distance $d$ from the origin is
+\begin{equation}
+\mathbf{B_b}=\frac{\mu_0}{2}(\mathbf{j}\times(\mathbf{r}-\mathbf{d}))
+\end{equation}
+
+Now the critical step is that the actual $B$-field in the hole is given by
+\begin{align}
+\mathbf{B_{tot}}&=\mathbf{B_a}-\mathbf{B_b} \\
+&=\frac{\mu_0}{2}[\mathbf{j}\times\mathbf{r}-\mathbf{j}\times(\mathbf{r}-\mathbf{d})] \\
+&=\frac{\mu_0}{2}\mathbf{j}\times[\mathbf{r}-\mathbf{r}+\mathbf{d}]
+\end{align}
+
+\begin{equation}\boxed{
+\mathbf{B_{tot}}=\frac{\mu_0}{2}(\mathbf{j}\times\mathbf{d})
+}\end{equation}
+\end{document}

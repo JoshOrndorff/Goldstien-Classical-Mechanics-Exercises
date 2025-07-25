@@ -1,0 +1,173 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{J.D. Jackson Problem 4.7}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+\section{Calculate the multipole moments}
+The formula for the multipole moments $q_{lm}$ is given as equation (4.3) in the text.
+\begin{equation}
+q_{lm}=\int Y_{lm}^*(\theta', \phi'){r'}^{l+2}e^{-r'}\sin^2{\theta'} \, \mathrm{d}V
+\end{equation}
+
+\begin{equation}
+q_{lm}=\frac{1}{64\pi}\int Y_{lm}^*(\theta', \phi'){r'}^{l+4}e^{-r'}\sin^3{\theta'} \, \mathrm{d}r \,\mathrm{d}\theta \,\mathrm{d}\phi
+\end{equation}
+
+We know by azimuthal symmetry that $m=0$, and the $Y_{lm}$'s simplify according to equation (3.57).
+\begin{equation}
+q_{l0}=\frac{1}{64\pi} \sqrt{\frac{2l+1}{4\pi}}\iiint P_l(\cos\theta'){r'}^{l+4} e^{-r'} \sin^3(\theta') \, \mathrm{d}r \,\mathrm{d}\theta \,\mathrm{d}\phi
+\end{equation}
+
+Evaluating the easy $\phi$ integral and separating the remaining integrals,
+\begin{equation}
+q_{l0}=\frac{1}{32}\sqrt{\frac{2l+1}{4\pi}}\int_0^\infty {r'}^{l+4}e^{-r'}\,\mathrm{d}r' \int_0^{\pi}P_l(\cos\theta')\sin^3\theta' \, \mathrm{d}\theta
+\end{equation}
+
+I'll focus now on evaluating the $\theta$ integral which can be most readily accomplished by making a substitution.  Let $x=\cos\theta'$ so that $\mathrm{d}x=-\sin\theta\mathrm{d}\theta'$ and $\sin^2\theta'=1-x^2$.  We can also rewrite the factor $1-x^2$ in terms of Legendre polynomials so that we can later utilize their orthogonality.
+\begin{equation}
+-\int_1^{-1}P_l(x)(1-x^2)\,\mathrm{d}x = \frac{2}{3}\int_1^{-1}P_l(x)[P_2(x)-P_0(x)] \,\mathrm{d}x
+= -\frac{2}{3}\int_{-1}^1 P_l(x)[P_2(x)-P_0(x)] \,\mathrm{d}x
+\end{equation}
+
+We know by orthogonality of the Legendre polynomials that the integral is zero when $l\neq (0,2) $, and conveniently (see wikipedia for example) that $\int_{-1}^1P_l^2(x) \,\mathrm{d}x = \frac{2}{2l+1}$.  So finally, we can get the $q_{l0}$'s.
+\begin{equation}
+q_{l0}=\frac{-4}{3(2l+1)}\frac{1}{32}\sqrt{\frac{2l+1}{4\pi}}\int_0^\infty {r'}^{l+4}e^{-r'}\,\mathrm{d}r
+\end{equation}
+
+\begin{subequations}
+\begin{align}
+q_{00}&=\frac{4}{3}\frac{1}{32}\sqrt{\frac{1}{4\pi}}\int_0^\infty {r'}^4 e^{-r'} \,\mathrm{d}r = \sqrt{\frac{1}{4\pi}} \\
+q_{20}&=-\frac{4}{15}\frac{1}{32}\sqrt{\frac{5}{4\pi}}\int_0^\infty {r'}^6 e^{-r'} \,\mathrm{d}r = -6\sqrt{\frac{5}{4\pi}}
+\end{align}
+\end{subequations}
+
+So all we have left to do now is plug these into equation (4.1) to get the electric potential.
+\begin{equation}
+\Phi(\mathbf{x})=\frac{1}{4\pi\epsilon_0}\left[4\pi\sqrt{\frac{1}{4\pi}}\frac{1}{r}\sqrt{\frac{1}{4\pi}}-\frac{4\pi}{5}6\sqrt{\frac{5}{4\pi}}\frac{1}{r^3}\sqrt{\frac{5}{4\pi}}\frac{1}{2}(3\cos^2\theta-1)\right]
+\end{equation}
+
+\begin{equation}
+\boxed{
+\frac{1}{4\pi\epsilon_0}\left[\frac{1}{r}-\frac{3}{r^3}(3\cos^2\theta-1)\right]
+}
+\end{equation}
+
+\section{Potential everywhere and near the origin}
+The multipole expansion gives the correct electric potential as long as the point of interest is farther from the origin than any of the source charge.  That is, $r>r'$.  In part a, this criteria is not strictly met as the charge distribution, $\rho$ does not become zero even at large distances.  The method in part a, however, can be considered a good approximation of the electric potential if the point of interest is far enough from the origin because the charge distribution decays exponentially, and for large enough radii the vast majority of charge is inside the radius of interest.  But the problem now asks for the potential anywhere in space.  We must obtain a result that is valid everywhere including close to or even at the origin.  In order to do this we will divide space into two regions, the region outside the radius of interest, and the region inside the radius of interest.
+
+To find the potential due to all the charge inside the radius of interest, we can use the regular old multipole expansion as described in Jackson's text.  This will follow almost exactly as above, except that the bounds of the $r$ integral will be from $0$ to $r$, instead of $0$ to $\infty$.
+\begin{equation}
+q^{(i)}_{l0}=\frac{-4}{3(2l+1)}\frac{1}{32}\sqrt{\frac{2l+1}{4\pi}}\int_0^r {r'}^{l+4}e^{-r'}\,\mathrm{d}r
+\end{equation}
+
+In order to make writing the radial integrals a little more concise, I'll define a function that we will use in several places, $f_n(r)\equiv-e^{-r}[r^n+nr^{n-1}+n(n-1)r^{n-2}+\cdots+n!x^0]$.
+
+\begin{subequations}\begin{align}
+q^{(i)}_{00} = \frac{1}{24} \sqrt{\frac{1}{4\pi}}&\left[f_4(r)+4!\right] \\
+q^{(i)}_{20} = -\frac{1}{120} \sqrt{\frac{5}{4\pi}}&\left[f_6(r)+6!\right]
+\end{align}\end{subequations}
+
+So now we can solve for the potential due to charge inside the radius of interest as we did in part a.
+\begin{align}
+\Phi^{(i)}(\mathbf{x})&=\frac{1}{4\pi\epsilon_0}\sum_l\frac{4\pi}{2l+1}q_{l0}\frac{Y_{l0}(\theta,\phi}{r^{l+r}} \\
+&=\frac{1}{4\pi\epsilon_0}\left[ 4\pi \frac{1}{24}\sqrt{\frac{1}{4\pi}}(f_4(r)+4!)\frac{P_0(\cos\theta)}{r}+\frac{4\pi}{5}\frac{-1}{120}\sqrt{\frac{5}{4\pi}}(f_6(r)+6!)\sqrt{\frac{5}{4\pi}}\frac{P_2(\cos\theta)}{r^3}\right] \\
+&=\frac{1}{4\pi\epsilon_0}\left[\frac{f_4(r)+4!}{24}\frac{P_0(\cos\theta)}{r}-\frac{f_6(r)+6!}{120}\frac{P_2(\cos\theta)}{r^3}\right]
+\end{align}
+
+In order to find the electric potential due to all the charge located outside the radius of interest, we have to modify the derivation of the multipole expansion.  The new expansion will be nearly identical, but if we go back to equation (3.70) the roles of $r_<$ and $r_>$ have changed.  Swapping the role of $r$ and $r'$ like this will change the integral for $\Phi^{(o)}(\mathbf{x})$.
+\begin{equation}
+\Phi^{(o)}(\mathbf{x})= \frac{1}{4\pi\epsilon_0}\sum_{l,m}\frac{4\pi}{2l+1}
+\left[\int Y^*_{lm}(\theta',\phi')\frac{1}{{r'}^{l+1}}\rho(\mathbf{x})dV\right]
+r^lY_{lm}(\theta,\phi)
+\end{equation}
+
+In order to keep our method as similar as possible to what we did above, we will redifine the $q_{lm}$'s as the factor in square brackets above.  The $\theta$ and $\phi$ integrals work out just as they did before assuring us that only the $l=(0,2)$ terms survive, and we still know that $m=0$ by azimuthal symmetry.
+\begin{equation}
+q^{(o)}_{l0}=\frac{2}{2l+1}\frac{1}{32}\sqrt{\frac{2l+1}{4\pi}}\int_r^\infty {r'}^{3-l}e^{-r'}\,\mathrm{d}r'
+\end{equation}
+
+\begin{subequations}\begin{align}
+q^{(0)}_{00} &= -\frac{1}{24} \sqrt{\frac{1}{4\pi}}f_3(r) \\
+q^{(0)}_{20} &= \frac{1}{120} \sqrt{\frac{5}{4\pi}}f_1(r)
+\end{align}\end{subequations}
+
+So plug those back in and find the electric potential due to all charge outside the radius of interest.
+\begin{align}
+\Phi^{(o)}(\mathbf{x})&=\frac{1}{4\pi\epsilon_0}\left[-4\pi\frac{1}{24}\sqrt{\frac{1}{4\pi}}f_3(r)\sqrt{\frac{1}{4\pi}}P_0(\cos\theta)+\frac{4\pi}{5}\frac{1}{120}\sqrt{\frac{5}{4\pi}}f_1(r)r^2\sqrt{\frac{5}{4\pi}}P_2(\cos\theta)\right] \\
+&=\frac{1}{4\pi\epsilon_0}\left[\frac{1}{24}P_0(\cos\theta)+\frac{f_1(r)}{120}r^2P_2(\cos\theta)\right]
+\end{align}
+
+We've now found the contributions to electric potential from all the charge inside the radius of interest, $\Phi^{(i)}$, and all the charge outside, $\Phi^{(o)}$.  So let's put them together to obtain a complete no-approximations-included closed form the the potential at any point in space.
+\begin{equation}\boxed{
+\Phi(\mathbf{x})=\Phi^{(i)}(\mathbf{x})+\Phi^{(o)}(\mathbf{x})=
+\frac{1}{4\pi\epsilon_0}\left[\frac{f_4(r)+4!}{24r}-\frac{f_6(r)+6!}{120r^3}P_2(\cos\theta)-\frac{f_3(r)}{24}+\frac{f_1(r)}{120}r^2P_2(\cos\theta)\right]
+}\end{equation}
+
+As mentioned, the above result is completely exact.  The first two terms in the square brackets come from the charge inside the radius of interest, and the second two terms are from charge outside.  It is tempting to say that for points of interest near the origin we can just throw away the first two terms, but strictly speaking that is not true.  That term will be zero only \textit{at} the origin.  Instead of throwing them out right away, we'll see how they affect the electrica potential near the origin when we make an approximation to a certain order.  the proper way to make an approximation is to do taylor expansions of the $f_n$'s (with the functions that multiply them).
+\begin{subequations}\begin{align}
+r^2f_1(r) &\approx-r^2+\frac{1}{2}r^4 \\
+f_3(r)&\approx-6+\frac{1}{4}r^4 \\
+\frac{1}{r}f_4(r) &\approx \frac{-24}{r}+\frac{1}{5}r^4 \\
+\frac{1}{r^3}f_6(r) &\approx \frac{-720}{r^3}+\frac{1}{7}r^4
+\end{align}\end{subequations}
+
+I'll substitute these Taylor expansions up to order $r^2$ into the exact form of the electric potential that we found above using parentheses to indicate where a substitution has been made.
+\begin{equation}
+\Phi(\mathbf{x})\approx\frac{1}{4\pi\epsilon_0}\left[
+\frac{\left(-\frac{24}{r}\right)+\frac{24}{r}}{24}-\frac{\left(-\frac{720}{r^3}\right)+\frac{720}{r^3}}{120}P_2(\cos\theta)-\frac{(-6)}{24}+\frac{(-r^2)}{120}P_2(\cos\theta)
+\right]
+\end{equation}
+
+The first two terms in the square brackets equal zero which means that for the order $r^2$ approximation we could have just ignored the contributions from the standard multipole expansion, $\Phi^{(i)}$.  But for higher orders those terms would not equal zero, so keeping them around is necessary because there is no way to know before hand whether they will be zero or not.  In fact it turns out that order $r^4$ is the first term where $\Phi^{(i)}\neq0$.
+\begin{equation}\boxed{
+\Phi(\mathbf{x})\approx\frac{1}{4\pi\epsilon_0}\left[\frac{1}{4}-\frac{r^2}{120}P_2(\cos\theta)\right]
+}\end{equation}
+
+\section{Energy interaction for a real nulceus}
+Jackson gives us some units in part c, so $\Phi(\mathbf{x})$ can finally be written more formally (and more correctly IMHO) as,
+\begin{equation}
+\Phi(\mathbf{x})=\frac{-e}{4\pi\epsilon_0a_0}\left[\frac{1}{4}-\frac{1}{120}\left(\frac{r}{a_0}\right)^2 P_2(\cos\theta)\right]
+=\frac{-e}{16\pi\epsilon_0a_0}\left[1-\frac{1}{60}\left(\frac{r}{a_0}\right)^2 (3\cos^2\theta-1)\right]
+\end{equation}
+
+I'll find the energy using the definition eq (4.21) rather than the multipole expansion.  Remember that in the following, $\rho_{nuc}$ represents the charge distribution of the nuclues, not the charge distribution given earlier that generates the external potential.
+\begin{equation}
+W=\int \rho_{nuc} \Phi(\mathbf{x}) \,\mathrm{d}V =\frac{-e}{16\pi\epsilon_0 a_0}\int\rho_{nuc}\left[1-\frac{1}{60}\left(\frac{r}{a_0}\right)^2 (3\cos^2\theta-1)\right]\,\mathrm{d}V
+\end{equation}
+
+\begin{equation}
+W=\frac{-e}{16\pi\epsilon_0a_0}\left[\int\rho_{nuc}\,\mathrm{d}V-\frac{1}{60a_0^2}\int\rho_{nuc}r^2(3\cos^2\theta-1)\,\mathrm{d}V\right]
+\end{equation}
+
+We know that the integral of nuclear charge density over all of space is just the net nuclear charge $Ze$.
+\begin{equation}
+W=\frac{-e}{16\pi\epsilon_0a_0}\left[Ze-\frac{1}{60a_0^2}\int\rho_{nuc}(3r^2\cos^2\theta-r^2)\,\mathrm{d}V\right]
+\end{equation}
+
+\begin{equation}
+W=\frac{-e^2}{16\pi\epsilon_0a_0}\left[Z-\frac{1}{60a_0^2}\frac{1}{e}\int\rho_{nuc}(3z^2-r^2)\,\mathrm{d}V\right]
+\end{equation}
+
+We'll use the definition of quadripole moment from eq (4.25) and just before it i nthe same way that we used the net charge previously.
+\begin{equation}
+W=\frac{-e^2}{16\pi\epsilon_0a_0}\left[Z-\frac{1}{60a_0^2}Q\right]
+\end{equation}
+
+The first term in the square brackets represents the contribution from the nucleus's net charge, and the second is from the quadripole interaction.  The contribution from the net charge is far larger than the quadripole contribution, but Jackson does not specify an atomic number $Z$, so I'll assume that he is interested only in calculating the energy from the quadripole term.
+\begin{align}
+W_{quad}=\frac{e^2Q}{960\pi\epsilon_0 a_0^3}=6.4\times 10^{-28} \mathrm{J}
+\end{align}
+
+Plugging in the values we were given, the frequency that corresponds to this interaction energy is,
+\begin{equation}\boxed{
+f_{quad}\approx974\,\mathrm{kHz}
+}\end{equation}
+
+\end{document}

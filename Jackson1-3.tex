@@ -1,0 +1,136 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{parskip}
+
+\begin{document}
+\title{J.D. Jackson Problem 1.3}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+\section{Spherical Shell}
+Although we don't have a choice in this problem, it is wise to use spherical coordinates because of the geometry's spherical symmetry.
+
+We know by symmetry that $\rho(\mathbf{x}) = \rho(r)$. We also know that there is only charge at a specific radius, $R$, and that $\rho$ should be proportional to the total charge $Q$. Let's call our proportionality constant $A$.
+
+\begin{equation}\label{a-density-1}
+\rho(r)=AQ\delta(r-R)
+\end{equation}
+
+In order to find the proportionality constant, $A$, we need the charge density's integral over all space to return the total charge, $Q$.
+\begin{equation}
+\iiint\rho(r) \mathrm{d}^3x = Q
+\end{equation}
+
+\begin{equation}
+\int_0^\pi \int_0^{2\pi}\int_0^\infty AQ\delta(r-R) \,r^2 \sin\theta \,\mathrm{d}r\, \mathrm{d}\phi\, \mathrm{d}\theta
+\end{equation}
+
+Performing the angular integrals is trivial, and we can remove the constants $A$, and $Q$ from the integral.
+\begin{equation}
+4\pi AQ\int_0^\infty \delta(r-R)\,r^2\,\mathrm{d}r =Q
+\end{equation}
+
+Cancelling the $Q$'s and performing the integral gives
+\begin{equation}
+4\pi AR^2=1
+\end{equation}
+\begin{equation}
+A=\frac{1}{4\pi R^2}
+\end{equation}
+
+Finally substituting back into equation \ref{a-density-1} gives
+\begin{equation}\boxed{
+\rho(r) = \frac{Q}{4\pi R^2}\delta(r-R)
+}\end{equation}
+
+As a final sanity check, we confirm that the units are Coulombs per cubic meter, which they are (remember the units on a delta function).  Note also, that the $R^2$ could be replaced with $r^2$ as integrating over the delta function will yield the same result in either case.
+
+\section{Cylindrical Shell}
+We'll start as before by observing cylindrical symmetry, and using a proportionality constant.
+\begin{equation}
+\rho(r) = A\lambda \delta(r-b)
+\end{equation}
+
+Again we'll integrate, but this time we will not integrate over all space. The total charge on the cylinder is infinite because it stretches to infinity in both $z$-directions. Rather we will integrate in a plane perpendicular to that axis to get the specified linear charge density.
+\begin{equation}
+\int_0^{2\pi}\int_0^\infty A\lambda\delta(r-b)\, r \,\mathrm{d}r\, \mathrm{d}\theta = \lambda
+\end{equation}
+
+Performing the radial integral and taking constants outside the integral,
+\begin{equation}
+2\pi A\lambda\int_0^\infty \delta(r-b)\,r\,\mathrm{d}r = \lambda
+\end{equation}
+
+Doing the final integral, canceling $\lambda$, and solving for $A$,
+\begin{equation}
+A=\frac{1}{2\pi b}
+\end{equation}
+
+So the final result is
+\begin{equation}\boxed{
+\rho(r)=\frac{\lambda}{2\pi b}\delta(r-b)
+}\end{equation}
+
+\section{Flat Disc (Cylindrical Coordinates)}
+Although Jackson doesn't mention it, we will need to use Heaviside step functions for this one to terminate the disc.
+\begin{equation}
+\rho(r, z)=AQ\delta(z)\Theta(R-r)
+\end{equation}
+
+\begin{equation}
+\int_{-\infty}^{\infty}\int_0^\infty\int_0^{2\pi}AQ\delta(z)\Theta(R-r)\,r\,\mathrm{d}\theta\,\mathrm{d}r\,\mathrm{d}z = Q
+\end{equation}
+
+\begin{equation}
+2\pi AQ\int_0^\infty \Theta(R-r)\,r\,\mathrm{d}r = Q
+\end{equation}
+
+\begin{equation}
+2\pi A\int_0^R r\,\mathrm{d}r = 1
+\end{equation}
+
+\begin{equation}
+A=\frac{1}{\pi R^2}
+\end{equation}
+
+\begin{equation}\boxed{
+\rho(r, z)=\frac{Q}{\pi R^2}\delta(z)\Theta(R-r)
+}\end{equation}
+
+\section{Flat Disc (Spherical Coordinates)}
+Again, we will need to use Heaviside step functions to terminate the disc.
+\begin{equation}
+\rho(r, z)=AQ\delta\left(\theta-\frac{\pi}{2}\right)\Theta(R-r)
+\end{equation}
+
+\begin{equation}
+\int_0^\infty\int_0^\pi\int_0^{2\pi}AQ\delta\left(\theta-\frac{\pi}{2}\right)\Theta(R-r)\,r^2\sin\theta\,\mathrm{d}\phi\,\mathrm{d}\theta\,\mathrm{d}r\ = Q
+\end{equation}
+
+Perform the $\phi$ integral and take care of that Heaviside function by changing the bounds on the $R$ integral.
+\begin{equation}
+2\pi AQ\int_0^R\int_0^\pi\delta\left(\theta-\frac{\pi}{2}\right)\,r^2\sin\theta\,\mathrm{d}\theta\,\mathrm{d}r\ = Q
+\end{equation}
+
+Cancel the $Q$'s and do the theta integral.
+\begin{equation}
+2\pi A\int_0^R r^2\,\mathrm{d}r\ = 1
+\end{equation}
+
+Do the final integral and solve for $A$.
+\begin{equation}
+A=\frac{3}{2\pi R^3}
+\end{equation}
+
+Plugging back into the original charge density
+\begin{equation}\boxed{
+\rho(r, z)=\frac{3Q}{2\pi R^3}\delta\left(\theta-\frac{\pi}{2}\right)\Theta(R-r)
+}\end{equation}
+
+
+\end{document}

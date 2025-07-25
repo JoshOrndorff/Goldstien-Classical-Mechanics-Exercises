@@ -1,0 +1,85 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{J.D. Jackson Problem 4.10}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+\section{Electric field between spheres}
+A popular approach to solving this problem is to guess a form of the solution and then show that it can be made to fit the boundary conditions.  I prefer the more mathematically rigorous solution, so I will take that approach here.  Regardless of which method you prefer, it is best to choose the $z$-axis so that the problem has azimuthal symmetry (i.e. so that the upper dome is filled with dielectric and the lower dome is empty or vice versa).  Because we have this symmetry, we know the form of the electric \textit{potential} inside must be,
+\begin{subequations}\begin{align}
+\Phi_\epsilon(r, \theta)&=\frac{1}{4\pi\epsilon}\sum_{l=0}^\infty\left[A_lr^l+B_lr^{-(l+1)}\right]P_l(\cos\theta) \\
+\Phi_{\epsilon_0}(r, \theta)&=\frac{1}{4\pi\epsilon_0}\sum_{l=0}^\infty\left[C_lr^l+D_lr^{-(l+1)}\right]P_l(\cos\theta)
+\end{align}\end{subequations}
+
+In order to determine the $4l$ unknown constants, we'll solve subject to the following four boundary conditions.  We'll also introduce the variables $V_a$ and $V_b$ to represent the electric potential on the inner and outer surfaces respectively.
+\begin{subequations}\begin{align}
+\Phi_\epsilon(a, \theta)&=\Phi_{\epsilon_0}(a, \theta)=V_a \\
+\Phi_\epsilon(b, \theta)&=\Phi_{\epsilon_0}(b, \theta)=V_b
+\end{align}\end{subequations}
+
+The fact that the electric potential on each sphere is a constant proves to be incredibly useful.  I'll apply the boundary condition for the dielectric-filled space at the outer surface noting that $V_b=V_bP_0(\cos\theta)$.
+\begin{equation}
+\frac{1}{4\pi\epsilon}\sum_{l=0}^\infty\left[A_lb^l+B_lb^{-(l+1)}\right]P_l(\cos\theta) = V_bP_0(\cos\theta)
+\end{equation}
+
+By orthogonality of the Legendre polynomials, we know that the only possible $P_l$ that can be in $\Phi_\epsilon$ is $P_0$.  If this is not immediately clear, multiply both sides of the preceeding equation by $P_{l'}(\cos\theta)$ and integrate $\theta$ from $0$ to $2\pi$.  The same technique applies to the free space region at either the inner or outer sphere assuring us that the only acceptible $l$-value is $l=0$.  This reduces the form of our electric potentials to,
+\begin{subequations}\begin{align}
+\Phi_\epsilon(r, \theta)&=\frac{1}{4\pi\epsilon}\left[A+\frac{B}{r}\right] \\
+\Phi_{\epsilon_0}(r, \theta)&=\frac{1}{4\pi\epsilon_0}\left[C+\frac{D}{r}\right]
+\end{align}\end{subequations}
+
+At this point we still have two boundary condtitions to apply to these electric potentials, and working through them gives the relationships $\frac{B}{\epsilon}=\frac{D}{\epsilon_0}$ and $\frac{A}{\epsilon}=\frac{C}{\epsilon_0}$, but it turns out that only the former is necessary for reasons that we will see shortly.  Let's find the value of $B$ by evaluating the potential difference between the inner and outer surface.
+\begin{equation}
+\frac{B}{4\pi\epsilon}\left(\frac{1}{a}-\frac{1}{b}\right)=V_a-V_b
+\end{equation}
+
+Now we can immediately solve for $B$.  And we can get $D$ by applying the same technique for the free space region, or by recalling the relationship $\frac{B}{\epsilon}=\frac{D}{\epsilon_0}$.
+\begin{equation}
+B=\frac{4\pi\epsilon ab(V_a-V_b)}{b-a} \qquad \qquad
+D=\frac{4\pi\epsilon_0 ab(V_a-V_b)}{b-a}
+\end{equation}
+
+I mentioned previously, that finding specific values of $A$ and $C$ would not be necessary.  We can now see that is the case because taking the gradient of our electric potentials yields electric fields that depend only on $B$ and $D$.
+\begin{subequations}\begin{align}
+\mathbf{E}_\epsilon(r, \theta)=-\nabla&\Phi_\epsilon(r, \theta)=\frac{B}{4\pi\epsilon r^2} = \frac{ab(V_a-V_b)}{(b-a)r^2}\\
+\mathbf{E}_{\epsilon_0}(r, \theta)=-\nabla&\Phi_{\epsilon_0}(r, \theta)=\frac{D}{4\pi\epsilon_0 r^2} = \frac{ab(V_a-V_b)}{(b-a)r^2}
+\end{align}\end{subequations}
+
+What's this?  The elecric fileds are the same!  We have an expression for electric field everywhere in terms of the potentials on the spheres.  This is a useful expression, but is not in terms of quantities specified in the problem.  We need to replace the dependence on $V_a$ and $V_b$ with dependence on $Q$.  To do this we'll apply Gauss's law to a spherical surface concentric with and located between the two conducting boundaries.
+\begin{equation}
+\oint D\cdot \mathrm{d}A = \int _{top}\epsilon E \cdot \mathrm{d}A + \int _{bot}\epsilon _0 E\cdot \mathrm{d}A= Q
+\end{equation}
+\begin{equation}
+\frac{2\pi\epsilon ab(V_a-V_b)}{b-a} + \frac{2\pi\epsilon_0 ab(V_a-V_b)}{b-a} =Q
+\end{equation}
+\begin{equation}
+\frac{ab(V_a-V_b)}{b-a}=\frac{Q}{2\pi(\epsilon + \epsilon _0)}
+\end{equation}
+
+Substituting this result into the previous expression for $E$, we finally have what the problem was looking for.
+\begin{equation}\boxed{
+\mathbf{E}(r)=\frac{Q}{2\pi(\epsilon+\epsilon_0)r^2}\mathbf{\hat{r}}
+}\end{equation}
+
+\section{Surface charge distribution on the inner sphere}
+It may have been surprising when we found that the electric field was exactly the same in the dielectric as it was in free space.  After all, isn't the dielectric's polarization supposed to cancel some of the external electric field?  The reason that the electric field really can be the same in both reqions is because the boundaries are conductors and the charge on them can redistribute so that the surface charge density adjacent to the dielectric can be greater than that adjacent to free space.  We'll now calculate the magnitudes of these charge densities.
+\begin{align}
+\sigma_\epsilon = \epsilon E_{\epsilon-r} (a, \theta) = \epsilon\frac{Q}{2\pi(\epsilon_0+\epsilon)a^2}=\frac{Q}{2\pi(\frac{\epsilon_0}{\epsilon}+1)a^2} \\
+\sigma_{\epsilon_0} = \epsilon_0 E_{\epsilon_0-r} (a, \theta) = \epsilon_0\frac{Q}{2\pi(\epsilon_0+\epsilon)a^2}=\frac{Q}{2\pi(\frac{\epsilon}{\epsilon_0}+1)a^2}
+\end{align}
+
+\section{Polarization (bound) charge density}
+In this part we're finding the surface charge that is induced in the dielectric itself due to the external electric field.
+\begin{equation}
+\sigma_{pol}=-(\mathbf{P}_2-\mathbf{P}_1)\cdot \hat{n}=-\mathbf{P}_2\cdot\hat{r}
+\end{equation}
+\begin{equation}\boxed{
+\sigma_{pol}=\frac{Q(\epsilon_0-\epsilon)}{2\pi(\epsilon_0+\epsilon)a^2}
+}\end{equation}
+\end{document}

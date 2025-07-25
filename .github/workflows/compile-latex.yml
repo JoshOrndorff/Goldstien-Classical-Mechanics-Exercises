@@ -15,5 +15,5 @@ jobs:
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
-          name: OrndorffSolutionsGoldsteinProblems.zip
+          name: OrndorffGraduatePhysicsSolutions.zip
           path: "*.pdf"

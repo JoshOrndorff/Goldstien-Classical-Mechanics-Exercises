@@ -1,0 +1,51 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{parskip}
+
+\begin{document}
+\title{J.D. Jackson Problem 1.9}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+\section{Parallel Plates}
+We have seen several times (e.g. problem 1.6) that the electric field due to an infinite sheet of surface charge can be calculate with a Gaussian pillbox.
+\begin{equation}
+\mathbf{E}=\frac{\sigma}{2\epsilon_0}\mathbf{\hat{n}}
+\end{equation}
+
+The force per unit area on the other plate (the negative plate) is as follows. Remember that $\mathbf{\hat{n}}$ points away from the first plate, which means the force is attractive.
+\begin{equation}
+\frac{\mathbf{F}}{A}=-\sigma \mathbf{E} = \frac{-\sigma^2}{2\epsilon_0}\mathbf{\hat{n}}
+\end{equation}
+
+If we want an expression in terms of constant voltage rather than charge density, we only need to substitute $\sigma=\epsilon_0 V / d$ which we found in problem 1.6 to get
+\begin{equation}
+\frac{\mathbf{F}}{A}=\frac{-\epsilon_0 V^2}{2d^2}\mathbf{\hat{n}}
+\end{equation}
+
+The force is still attractive.
+
+\section{Parallel Cylinders}
+The parallel cylinder case is almost identical. We found the electric field of one cylinder to be,
+\begin{equation}
+\mathbf{E}=\frac{\lambda}{2\pi r\epsilon_0}\mathbf{\hat{r}}
+\end{equation}
+
+We are told that the cylinder separation $d$, is much greater than either radius, so we can say that over the small cross section of the second cylinder, $\mathbf{E}$ is roughly constant and that,
+\begin{equation}
+\frac{\mathbf{F}}{l}=-\lambda\mathbf{E}=\frac{-\lambda^2}{2\pi d \epsilon_0}\mathbf{\hat{r}}
+\end{equation}
+
+The approximation will be better as the ratio $d/a$ increases. If you are uncomfortable with approximating the result, the objection should be raised upstream because we already used it in calculating capacitance in problem 1.7.
+
+To get the result in terms of electric potential, we just substitute $\lambda = \pi\epsilon_0 V/\ln(a/d)$.
+\begin{equation}
+\frac{\mathbf{F}}{l}=\frac{-\pi\epsilon_0 V^2}{2d\ln^2(a/d)}
+\end{equation}
+
+\end{document}

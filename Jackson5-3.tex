@@ -1,0 +1,51 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{J.D. Jackson Problem 5.3}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+We're asked to find the magnetic field due to a current density, so this is a typical application of the Biot-Savart law which is given as equation (5.4) in Jackson's text.
+\begin{equation}
+\mathrm{d}\mathbf{B}=\frac{\mu_0 I}{4\pi}\frac{\mathrm{d}\mathbf{l}\times\mathbf{x}}{|\mathbf{x}|^3}
+\end{equation}
+
+Using cylindrical coordinates with the point of interest at the origin, and $z$ as the location of the contributing loop.  We know that $\mathrm{d}l=a\mathrm{d}\mathbf{\theta}$ and $|\mathbf{x}|=\sqrt{a^2+z^2}$, so the integral simplifies
+\begin{equation}
+\mathrm{d}\mathbf{B}=\frac{\mu_0 I}{4\pi}\frac{a\mathrm{d}\theta\sqrt{a^2+z^2}}{(a^2+z^2)^{3/2}}
+\end{equation}
+
+We will first find the field due to a single loop.  By symmetry, we know that the radial components of magnetic field will cancel, and only the $z$-component contributes, so $\mathrm{d}B_z=\sin\arctan\frac{a}{z}\mathrm{d}B=\frac{a}{\sqrt{a^2+z^2}}\mathrm{d}B$.
+\begin{equation}
+\mathrm{d}\mathbf{B}=\frac{\mu_0 I}{4\pi}\frac{a^2\mathrm{d}\theta}{(a^2+z^2)^{3/2}}
+\end{equation}
+
+Integrating with respect to $\theta$ gives us the total magnetic field due to a single loop of current.
+\begin{equation}
+B_z=\frac{\mu_0 I}{4\pi}\int_0^{2\pi}\frac{a^2\mathrm{d}\theta}{(a^2+z^2)^{3/2}}=\frac{\mu_0I}{2}\frac{a^2}{(a^2+z^2)^{3/2}}
+\end{equation}
+
+Now we need to extend this result to account for contributions from all the loops instead of just one.  We'll integrate over $z$.  The number of turns in a small length is $N\mathrm{d}z$.
+\begin{equation}
+\mathrm{d}B_{z-tot}=\frac{\mu_0NI}{2}\frac{a^2}{(a^2+z^2)^{3/2}}\mathrm{d}z
+\end{equation}
+
+We have to write the bounds of integration in terms of the angles $\theta_1$ and $\theta_2$ as Jackson defines them in the problem.  Note that the negative in front of the lower bound is due to the fact that Jackson defines $\theta_1$ in a non-standard way.
+\begin{align}
+B_{z-tot}&=\frac{\mu_0NIa^2}{2}\int_{-\frac{a}{\tan\theta_1}}^{\frac{a}{\tan\theta_2}}\frac{\mathrm{d}z}{(a^2+z^2)^{3/2}} \\
+&=\frac{\mu_0NI}{2}\left[\frac{z}{\sqrt{a^2+z^2}}\right]_{-\frac{a}{\tan\theta_1}}^{\frac{a}{\tan\theta_2}} \\
+&=\frac{\mu_0NI}{2}\left[\frac{1}{\sqrt{\tan^2\theta_2+1}}+\frac{1}{\sqrt{\tan^2\theta_1+1}}\right] \\
+&=\frac{\mu_0NI}{2}\left[\frac{\cos\theta_2}{\sqrt{\sin^2\theta_2+\cos^2\theta_2}}+\frac{\cos\theta_2}{\sqrt{\sin^2\theta_1+\cos^2\theta_1}}\right]
+\end{align}
+
+\begin{equation}\boxed{
+B_{z-tot}=\frac{\mu_0NI}{2}[\cos\theta_2+\cos\theta_1]
+}\end{equation}
+
+I really believe that this result is valid for any finite values of $\theta_1$, $\theta_2$, and $N$.  I did not take any limits, although the result still holds in the limit as $NL \rightarrow \infty$.
+\end{document}

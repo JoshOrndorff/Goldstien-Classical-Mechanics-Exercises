@@ -1,0 +1,135 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{J.D. Jackson Problem 4.6}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+\section{Energy of quadrupole interaction}
+The correct solution of this problem relies heavily on little factoids that Jackson drops on us with little justification.  First he tells us that $\rho$ is cylindrically symetric.  Second he provides an external field that is cylindrically symetric about the same axis.  Third he define $Q\equiv\frac{1}{e}Q_{33}$.  So for this part there isn't a whole lot left to do.
+
+We start with the quadripole term of the work equation (4.24) in the text.
+\begin{equation}
+W=-\frac{1}{6}\sum_1\sum_j Q_{ij} \frac{\partial E_j}{\partial x_i}(0)
+\end{equation}
+
+Another little nugget of truth that Jackson gives us is that all the $Q_{ij}$'s are zero except for $Q_{33}$.  But, importantly, he footnotes on page 151 that really all the diagonal terms are nonzero such that $Q_{11}=Q_{22}=-\frac{1}{2}Q_{33}$.  We can also use Gauss's law for electrostatics to show that,
+\begin{equation}
+\nabla\cdot \mathbf{E} = \mathbf{0}
+\end{equation}
+\begin{equation}
+\frac{\partial E_x}{\partial x} + \frac{\partial E_y}{\partial y} + \frac{\partial E_z}{\partial z} = 0
+\end{equation}
+\begin{equation}
+\frac{\partial E_x}{\partial x} = \frac{\partial E_y}{\partial y} = -\frac{1}{2}\frac{\partial E_z}{\partial z}
+\end{equation}
+
+So the work equation can be written more simply.
+\begin{equation}
+W=\frac{1}{6}\left[
+\frac{-1}{2}Q_{33}\frac{-1}{2}\frac{\partial E_z}{\partial z}+
+\frac{-1}{2}Q_{33}\frac{-1}{2}\frac{\partial E_z}{\partial z}+
+Q_{33}\frac{\partial E_z}{\partial z}
+\right]
+\end{equation}
+
+\begin{equation}
+W=\frac{-1}{6}Q_{33}\frac{\partial E_z}{\partial z} \left[\frac{1}{4}+\frac{1}{4}+1 \right]
+\end{equation}
+
+\begin{equation}
+\frac{-1}{4}Q_{33}\frac{\partial E_z}{\partial z}
+\end{equation}
+
+Substituting the definition of quadripole moment,
+\begin{equation}
+\frac{-e}{4}Q\frac{\partial E_z}{\partial z}
+\end{equation}
+
+\section{An example with numbers}
+I didn't do this part.  Maybe I'll get back to it eventually.
+
+\section{Elipsoidal nucleus model}
+Starting with equation (4.9) or (4.25),
+\begin{equation}
+Q=\frac{1}{e}\int 3z^2-\left(\sqrt{x^2+y^2+z^2}\right)^2 \rho(\mathbf{x})\, \mathrm{d}V
+\end{equation}
+
+We know that $\rho$ is constant from the problem, so its value is $\rho=\frac{Ze}{V}$  Where the volume of the elipsoid is $V=\frac{4}{3}\pi ab^2$.  We should note here that I have chosen a single major axis oriented along the $z$-axis.  It would have been equally valid to choose a single minor axis along the $z$-axis and two major axes in the $xy$-plane.
+\begin{equation}
+Q=\frac{3Z}{4\pi ab^2}\int 2z^2-x^2-y^2 \, \mathrm{d}V
+=\frac{3Z}{4\pi ab^2}\int 2z^2-r^2 \, \mathrm{d}V
+\end{equation}
+
+See the final section for how to get the bounds of integration.
+\begin{equation}
+Q=\frac{3Z}{4\pi ab^2} \int_{-a}^a\int_0^{b\sqrt{1-\frac{z^2}{a^2}}}\int_0^{2\pi}
+2z^2r-r^3 \, \mathrm{d}\theta \, \mathrm{d}r \, \mathrm{d}z
+\end{equation}
+
+Performing the first two integrations,
+\begin{equation}
+Q=\frac{3Z}{2 ab^2} \int_{-a}^a
+\left. z^2r^2-\frac{1}{4}r^4 \right|_0^{b\sqrt{1-\frac{z^2}{a^2}}} \,\mathrm{d}z
+\end{equation}
+
+\begin{equation}
+Q=\frac{3Z}{2 ab^2} \int_{-a}^a z^2b^2 \left(1-\frac{z^2}{a^2}\right)-\frac{1}{4}b^4\left(1-\frac{z^2}{a^2}\right)^2 \,\mathrm{d}z
+\end{equation}
+
+\begin{equation}
+Q=\frac{3z}{2a}\int_{-a}^a z^2-\frac{z^4}{a^2}-\frac{b^2}{4}+\frac{b^2z^2}{2a^2}-\frac{b^2z^4}{4a^4}\,\mathrm{d}z
+\end{equation}
+
+\begin{equation}
+Q=\frac{3z}{a}\left[\frac{-b^2a}{4}+\frac{a^3}{3}+\frac{b^2a}{6}-\frac{a^3}{5}-\frac{b^2a}{20}\right]
+\end{equation}
+
+\begin{equation}
+Q=\frac{Z}{20}(-8b^2+8a^2)
+\end{equation}
+
+\begin{equation}
+\boxed{
+Q=\frac{2Z}{5}(a^2-b^2)
+}
+\end{equation}
+
+Next Jackson wants us to solve for the factor $\frac{a-b}{R}$.
+\begin{equation}
+Q=\frac{4Z}{5}(a-b)\frac{a+b}{2}=\frac{4Z}{5}(a-b)R=\frac{4Z}{5}\frac{a-b}{R}R^2
+\end{equation}
+
+Solving for the desired factor,
+\begin{equation}
+\frac{a-b}{R}=\frac{5Q}{4ZR^2}
+\end{equation}
+
+And plugging in the given values,
+\begin{equation}
+\frac{a-b}{R}=\frac{5\cdot(2.5 E^{-28})}{4\cdot 63\cdot(7.0 E^{-15})^2} \approx0.10123
+\end{equation}
+
+\appendix
+\section{Bounds of integration}
+It's well established (for example check out wikipedia) that the equation for an elipsoid aligned along the $z$-axis is
+\begin{equation}
+\frac{x^2+y^2}{b^2}+\frac{z^2}{a^2}=1
+\end{equation}
+
+We want to integrate over the volume of the elipsoid, so the $theta$ inegral is easy enough.  We just go all the way around the $xy$-plane.  I'll choose to make the $z$ integral easy too by integrating from $-a$ to $a$.  This means that all we need to do is solve the elipsoid equation for $r$ to get the bounds for $z$.
+\begin{equation}
+\frac{r^2}{b^2}=1-\frac{z^2}{a^2}
+\end{equation}
+\begin{equation}
+r=b\sqrt{1-\frac{z^2}{a^2}}
+\end{equation}
+
+So we will integrate the $r$ coordinate from $0$ to the critical $r$ value we just found.
+
+\end{document}

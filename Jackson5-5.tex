@@ -1,0 +1,46 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{J.D. Jackson Problem 5.5}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+\section{The central region}
+\section{Outside the coil}
+\section{Ends of the solenoid}
+We saw in problem 5.3 that the $B$-field along the $z$-axis is given by
+\begin{equation}
+B_z=\frac{\mu_0NI}{2}(\cos\theta_1+\cos\theta_2)
+\end{equation}
+
+Taking the origin of our cylindrical coordinate system at one end of the solenoid with the $z$-axis along the center of the solenoid, we can replase the cosines as follows
+\begin{equation}
+B_z=\frac{\mu_oNI}{2}\left(\frac{z}{\sqrt{z^2+a^2}}+\frac{L-z}{\sqrt{(L-z)^2+a^2}}\right)
+\end{equation}
+\begin{equation}
+\frac{\partial B_z}{\partial z}=\frac{\mu_0NI}{2}\left(\frac{1}{(z^2+a^2)^{3/2}}-\frac{1}{((L-z)^2+a^2)^{3/2}}\right)
+\end{equation}
+
+We can use these two equations along with the expansions found in problem 5.4 to the first order to obtain the following results
+\begin{subequations}
+\begin{equation}
+B_\rho(\rho,L)=\frac{\mu_0NI}{4}\frac{\rho}{a}
+\end{equation}
+\begin{equation}
+B_\rho(\rho,0)=-\frac{\mu_0NI}{4}\frac{\rho}{a}
+\end{equation}
+\begin{equation}
+B_z(\rho,L)=\frac{\mu_0NI}{2}
+\end{equation}
+\begin{equation}
+B_z(\rho,0)=\frac{\mu_0NI}{2}
+\end{equation}
+\end{subequations}
+
+
+\end{document}

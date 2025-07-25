@@ -1,0 +1,138 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{J.D. Jackson Problem 3.6}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+\section{Expansion in Spherical Harmonics}
+
+Begin with the known form of electric potential for point charges.
+\begin{equation}
+\Phi=\frac{q}{4\pi\epsilon_0}\left(\frac{1}{|\mathbf{r}-\mathbf{a}|}-\frac{1}{|\mathbf{r}+\mathbf{a}|}\right)
+\end{equation}
+
+Expand into spherical harmonics using equation 3.70.
+\begin{equation}
+\Phi=\frac{q}{\epsilon_0}\sum_{l,m}\left[
+\frac{1}{2l+1}\frac{r_<^l}{r_>^{l+1}}Y_lm^*(0,\phi')Y_lm(\theta,\phi)-
+\frac{1}{2l+1}\frac{r_<^l}{r_>^{l+1}}Y_lm^*(\pi,\phi')Y_lm(\theta,\phi)
+\right]
+\end{equation}
+
+\begin{equation}
+\Phi=\frac{q}{\epsilon_0}\sum_{l,m}
+\frac{r_<^l Y_{lm}(\theta,\phi)}{r_>^{l+1} (2l+1)}
+\left[Y_{lm}^*(0,\phi')-Y_{lm}^*(\pi,\phi')
+\right]
+\end{equation}
+
+We know that m=0 by azimutal symmetry of the source distribution
+\begin{equation}
+\Phi=\frac{q}{\epsilon_0}\sum_{l,m}
+\frac{r_<^l Y_{l0}^*(\theta,\phi)}{r_>^{l+1} (2l+1)}
+\left[Y_{l0}^*(0,\phi')-Y_{l0}^*(\pi,\phi')
+\right]
+\end{equation}
+
+\begin{subequations}
+Useful identities for these spherical harmonics:
+\begin{align}
+        Y_{l0}^*(0,\phi')&=Y_{l0}(0,\phi')=\sqrt{\frac{2l+1}{4\pi}}P_l(\cos0)=\sqrt{\frac{2l+1}{4\pi}}\\
+        Y_{l0}^*(\pi,\phi')&=Y_{l0}(\pi,\phi')=\sqrt{\frac{2l+1}{4\pi}}P_l(\cos\pi)=\sqrt{\frac{2l+1}{4\pi}}(-1)^l\\
+        Y_{l0}(\theta,\phi)&=\sqrt{\frac{2l+1}{4\pi}}P_l(\cos\theta)
+\end{align}
+\end{subequations}
+
+Substituting the above identities,
+\begin{equation}
+\Phi=\frac{q}{\epsilon_0}\sum_{l=0}^\infty
+\frac{r_<^l}{r_>^{l+1}(2l+1)}
+\sqrt{\frac{2l+1}{4\pi}}^2P_l(\cos\theta)
+\left[1-(-1)^l\right]
+\end{equation}
+
+\begin{equation}
+\boxed{\Phi=\frac{q}{2\pi\epsilon_0}\sum_{l-odd}
+\frac{r_<^l}{r_>^{l+1}}P_l(\cos\theta)}
+\end{equation}
+
+\section{Limit of a Dipole}
+Simply taking the limit as $a\rightarrow0$ will represent putting two point charges directly on top of each other.  We already know the potential of that configuration.  Instead, we will  keep the product $[qa]$ constant.  In this limit, it only makes sense to treat the case $[r>a]$
+\begin{equation}
+\Phi=\frac{q}{2\pi\epsilon_0}\sum_{l odd}
+\frac{a^l}{r^{l+1}}P_l(\cos\theta)
+\end{equation}
+
+We want to keep the product $qa$ constant, so we have to factor an a outside the sum.
+\begin{equation}
+\Phi=\frac{qa}{2\pi\epsilon_0}\sum_{l odd}
+\frac{a^{l-1}}{r^{l+1}}P_l(\cos\theta)
+\end{equation}
+
+Put in the dipole definition
+\begin{equation}
+\Phi=\frac{p}{4\pi\epsilon_0}\sum_{l odd}
+\frac{a^{l-1}}{r^{l+1}}P_l(\cos\theta)
+\end{equation}
+
+In the limit as $a\rightarrow0$, all term in the sum also approach zero except the $l=0$ term.
+\begin{equation}
+\lim_{a\rightarrow0}\Phi=\frac{p}{4\pi\epsilon_0r^2}P_1(\cos\theta)
+\end{equation}
+
+\begin{equation}
+\boxed{\lim_{a\rightarrow0}\Phi=\frac{p\cos\theta}{4\pi\epsilon_0r^2}}
+\end{equation}
+
+\section{Enclosing the dipole in a grounded sphere}
+We are now imposing the condition that the potential must be zero on the surface of a sphere.  We know the general form of the solution for potential inside a sphere with a known potential, so we will use it to perfectly cancel the potential that would have otherwise been induced by the dipole.
+
+\begin{equation}
+\Phi_h=\sum_l[D_lr^l+B_lR^{-l-1}P_l(\cos\theta)
+\end{equation}
+
+Because we can't have the potential blowing up at the origin,
+\begin{equation}
+\Phi_h=\sum_lD_lr^lP_l(\cos\theta)
+\end{equation}
+
+We are going to add these two solutions so that the boundary condition on the sphere is met,
+\begin{equation}
+\Phi_{total}=\Phi_h+\Phi_{dip}=\sum_lD_lr^lP_l(\cos\theta)+\frac{p}{4\pi\epsilon_0}P_1(\cos(\theta))
+\end{equation} 
+
+To make the algebra a little easier, I'll redefine the$D_l$'s as $A_l$'s.
+\begin{equation}
+\Phi_{total}=\frac{p}{4\pi\epsilon_0}\left[\sum_l-A_lr^lP_l(\cos\theta)+\frac{1}{r^2}P_1(\cos\theta)\right]
+\end{equation}
+
+Now I'll apply the boundary condition at the surface of the sphere.
+\begin{equation}
+\Phi_{total}(b,\theta)=0=\sum_l-A_lb^lP_l(\cos\theta)+\frac{1}{b^2}P_1(\cos\theta)
+\end{equation}
+
+\begin{equation}
+\sum_l A_l b^{l+2}P_l(\cos\theta)=P_1(\cos\theta)
+\end{equation}
+
+We know that the $P_l$'s are orthogonal so,
+\begin{equation}
+A_1 b^3 P_1(\cos\theta)=P_1(\cos\theta)
+\end{equation}
+
+So we've now found all the of $A_l$'s of which only one is non zero.
+\begin{equation}
+A_1=\frac{1}{b^3}
+\end{equation}
+
+Putting it all back together,
+\begin{equation}
+\boxed{\Phi_{total}=\frac{p\cos\theta}{4\pi\epsilon_0}\left[\frac{1}{r^2}-\frac{r}{b^3}\right]}
+\end{equation}
+\end{document}

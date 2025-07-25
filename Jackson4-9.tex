@@ -1,0 +1,63 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{J.D. Jackson Problem 4.9}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+\section{Electric potential everywhere}
+The potential outside of the sphere will include the potential due to a point charge which is given in the text as equation (3.38), and a solution to the homogeneous equation (3.33).  At a glance, it may seem that the potential inside the sphere will be quite complicated because in the most general cases, a dielectric can posess a non-zero charge density.  However, in this case, the bound charge accumulates only at the surface of the dielectric, so the charge density throughout the volume is still zero, and therefore, the potential inside is just the standard solution to Laplace's equation.
+\begin{align}
+\Phi_{out}&=\frac{q}{4\pi\epsilon_0}\sum_l\left[\frac{B_l}{r^{l+1}}+\frac{r_<^l}{r_>^{l+1}}\right]P_l(\cos\theta) \\
+\Phi_{in} &=\frac{q}{4\pi\epsilon_0}\sum_lA_lr^lP_l(\cos\theta)
+\end{align}
+
+I've taken some of the constants to be zero in the previous equations to meet boundary conditions at the origin and at infinity.  We have to solve these equations subject to the boundary contitions given as equation (4.50).
+\begin{align}
+\left. \epsilon\frac{\partial \phi_{in}}{\partial r} \right|_{r=a} &= \left. \epsilon_0\frac{\partial \Phi_{out}}{\partial r}\right|_{r=a} \\
+\left.\frac{\partial \Phi_{in}}{\partial \theta} \right|_{r=a} &= \left. \frac{\partial\Phi_{out}}{\partial \theta}\right|_{r=a}
+\end{align}
+
+Evaluating these derivatives gives us two equations that constrain the values of the $A_l$'s and $B_l$'s.
+\begin{equation}
+\epsilon A_l l a_{l-1}=\epsilon_0 \left[\frac{l a^{l-1}}{d^{l+1}}-\frac{B_l(l+1)}{a^{l+2}}\right]
+\end{equation}
+\begin{equation}
+A_la^l=\frac{B_l}{a^{l+1}}+\frac{a^l}{d^{l+1}}
+\end{equation}
+
+It takes a decent amount of algebra to solve those, but eventually it comes down to
+\begin{align}
+A_l&=\frac{l}{(l+\frac{\epsilon_0}{\epsilon}(l+1))d^{l+1}}\left[\frac{\epsilon_0}{\epsilon}-1\right]+\frac{1}{d^{l+1}} \\
+B_l&=\frac{la^{2l+1}}{(l+\frac{\epsilon_0}{\epsilon}(l+1))d^{l+1}}\left[\frac{\epsilon_0}{\epsilon}-1\right]
+\end{align}
+
+Now we can write the complete forms of the electric potential.
+\begin{align}
+\Phi_{out}&=\frac{q}{4\pi\epsilon_0}\sum_l\left[\frac{la^{2l+1}}{r^{l+1}(l+\frac{\epsilon_0}{\epsilon}(l+1))d^{l+1}}\left[\frac{\epsilon_0}{\epsilon}-1\right]+\frac{r_<^l}{r_>^{l+1}}\right]P_l(\cos\theta) \\
+\Phi_{in} &=\frac{q}{4\pi\epsilon_0}\sum_l\left[\frac{l}{l+\frac{\epsilon_0}{\epsilon}(l+1)}\left[\frac{\epsilon_0}{\epsilon}-1\right]+1\right]\frac{r^l}{d^{l+1}}P_l(\cos\theta)
+\end{align}
+
+As a sanity check, it is useful to ensure that the two functional forms of electric potential have the same value at the surface of the sphere, and ours do.
+
+\section{Rectangular components near the origin}
+
+\section{Limit of a conducting sphere}
+We want to confirm that our solution reduces to the expected result when the dielectric constant increases to infinity, which is to say that the sphere becones a conductor.  In the limit that $\frac{\epsilon}{\epsilon_0}\rightarrow\infty$
+\begin{equation}
+\Phi_{out}=\frac{q}{4\pi\epsilon_0}\sum_{l=0}^\infty\left(\frac{r_<^l}{r_>^{l+1}}-\frac{a^{2l+1}}{r^{l+1}d^{l+1}}\right)P_l(\cos\theta)
+\end{equation}
+
+For the region inside the sphere, we must consider the general case $l\neq0$ and the special case of $l=0$.
+\begin{equation}
+\Phi_{in}=\frac{q}{4\pi\epsilon_0d}+\frac{q}{4\pi\epsilon_0}\sum_{l=1}^\infty[0]\frac{r^l}{d^{l+1}}P_l(\cos\theta)=\frac{q}{4\pi\epsilon_0d}
+\end{equation}
+
+As we expected, the electric potential inside the conductor is constant but not zero (because $\Phi=0$ is infinitely far away from the sphere).
+
+\end{document}

@@ -1,0 +1,106 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{J.D. Jackson Problem 3.9}
+\author{Josh Orndorff}
+\maketitle
+
+I'll begin this problem by assuming that $\Phi$ is of a seperable form, $\Phi (r,\theta,z) = R(r)\Theta(\theta)Z(z)$ in cylinderical coordinates.  Applying the Laplacian operator gives three ordinary differential equations subject to five constraints.
+
+\begin{subequations}
+Five boundary constraints for separated solutions
+\begin{align}
+       \Phi=0 &@ z=0 \\
+       \Phi=0 &@ z=L \\
+       \Phi\neq \pm\infty &@ r=0 \\
+       \Phi=V(\theta,z) &@ r=b \\
+       \Phi(r,0,z)&=\Phi(r,2\pi,z)
+\end{align}
+\end{subequations}
+
+Solving each of the three ordinary diferential equations and naming the constants in the style of Jackson section 3.7 we have
+\begin{equation}
+\frac{Z''(z)}{Z(z)}=-k^2 \Rightarrow Z(z)=A_z\sin kz + B_z \cos kz
+\end{equation}
+Constraints 1 and 2 show that $B_z = 0$ and $k=\frac{n\pi}{L}$ where n is a positive integer.
+\begin{equation}
+\frac{\Theta''\theta)}{\Theta(\theta)}=-\nu^2 \Rightarrow \Theta(\theta)=A_\theta\sin \nu\theta + B_\theta \cos \nu\theta
+\end{equation}
+Constraint 5 shows that $\nu$ is a non-negative integer.
+\begin{equation}
+R''+\frac{R'}{r}-\left(k^2+\frac{\nu^2}{r^2}\right)R=0
+\end{equation}
+Here the primes denote derivative with respect to r.  Now, we'll follow Jackson and make the substitution $x=kr$ , $dx=k dr$
+\begin{equation}
+\ddot{R}+\frac{\dot{R}}{x}-\left(1+\frac{\nu^2}{x^2}\right)R=0 \Rightarrow R(x)=A_rI_\nu(x)+B_rK_\nu(x)
+\end{equation}
+Constraint 3 shows that $B_r=0$.
+
+So putting the whole solution back together
+\begin{equation}\boxed{
+\Phi=\sum_{n, \nu}I_\nu\left(\frac{n\pi r}{L}\right)\sin\left(\frac{n\pi z}{L}\right)
+\left[A_{n\nu}\sin(\nu\theta)+B_{n\nu}\cos(\nu\theta)\right]
+}\end{equation}
+
+All that is left to do now is calculate the $A_{n\nu}$'s and $B_{n\nu}$'s which can be accomplished by applying the final boundary condition.
+\begin{equation}
+V(\theta,z)=\sum_{n,\nu}I_\nu\left(\frac{n\pi b}{L}\right)\sin\left(\frac{n\pi z}{L}\right)
+\left[A_{n\nu}\sin(\nu\theta)+B_{n\nu}\cos(\nu\theta)\right]
+\end{equation}
+
+Multiply both sides by $\cos(\nu'\theta)$ and integrate
+\begin{equation}
+\int_0^{2\pi}V(\theta,z)\cos(\nu'\theta)\mathrm{d}\theta
+=\sum_{n,\nu}I_\nu\left(\frac{n\pi b}{L}\right)\sin\left(\frac{n\pi z}{L}\right)
+\int_0^{2\pi}A_{n\nu}\sin(\nu\theta)\cos(\nu'\theta)+B_{n\nu}\cos(\nu\theta)\cos(\nu'\theta)\mathrm{d}\theta
+\end{equation}
+
+The $A_{n\nu}$ terms are all zero because the sine and cosine product integrates to zero for any values of $\nu$ and $\nu'$.  The $B_{n\nu}$ terms integrate to zero in every case except when $\nu=\nu'$.
+\begin{equation}
+\int_0^{2\pi}V(\theta,z)\cos(\nu'\theta)\mathrm{d}\theta
+=\sum_{n,\nu}I_\nu\left(\frac{n\pi b}{L}\right)\sin\left(\frac{n\pi z}{L}\right)
+\pi B_{n \nu}\delta_{\nu\nu'}
+\end{equation}
+
+The kronecker delta colapses the sum over $\nu$
+\begin{equation}
+\int_0^{2\pi}V(\theta,z)\cos(\nu'\theta)\mathrm{d}\theta =
+\pi \sum_nB_{n \nu'}I_{\nu'}\left(\frac{n\pi b}{L}\right)\sin\left(\frac{n\pi z}{L}\right)
+\end{equation}
+
+Multiply both sides by $\sin(\frac{n'\pi z}{L})$ and integrate
+\begin{equation}
+\int_0^L\int_0^{2\pi}V(\theta,z)\cos(\nu'\theta)\sin\left(\frac{n'\pi z}{L}\right)\mathrm{d}\theta \mathrm{d}z =
+\pi \sum_n B_{n \nu'}I_{\nu'}\left(\frac{n\pi b}{L}\right)
+\int_0^L\sin\left(\frac{n\pi z}{L}\right)\sin\left(\frac{n'\pi z}{L}\right)\mathrm{d}z
+\end{equation}
+
+As with the cosines above, the sines are orthogonal and the integral is only non-zero when $n=n'$.
+\begin{equation}
+\int_0^L\int_0^{2\pi}V(\theta,z)\cos(\nu'\theta)\sin\left(\frac{n'\pi z}{L}\right)\mathrm{d}\theta \mathrm{d}z =
+\pi \sum_nB_{n \nu'}I_{\nu'}\left(\frac{n\pi b}{L}\right)
+\frac{L}{2}\delta_{nn'}
+\end{equation}
+
+The kronecker delta colapses the sum over $n$
+\begin{equation}
+\int_0^L\int_0^{2\pi}V(\theta,z)\cos(\nu'\theta)\sin\left(\frac{n'\pi z}{L}\right)\mathrm{d}\theta \mathrm{d}z =
+\frac{\pi L}{2} B_{n' \nu'}I_{\nu'}\left(\frac{n'\pi b}{L}\right)
+\end{equation}
+
+Finally, solving for $B_{n \nu}$ and noting that the $A_{n \nu}$'s can be calculated in the exact same way, we have,
+\begin{subequations}
+\begin{align}
+A_{n\nu}&=\frac{2}{L\pi I_\nu \left(\frac{n\pi b}{l}\right)}\int_0^{2\pi}\int_0^L
+\sin\left(\frac{n \pi z}{L}\right)\sin(\nu \theta) V(\theta, z) dz d\theta \\
+B_{n\nu}&=\frac{2}{L\pi I_\nu \left(\frac{n\pi b}{l}\right)}\int_0^{2\pi}\int_0^L
+\sin\left(\frac{n \pi z}{L}\right)\cos(\nu \theta) V(\theta, z) dz d\theta
+\end{align}
+\end{subequations}
+
+\end{document}

@@ -1,0 +1,98 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{J.D. Jackson Problem 3.18}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+I'll begin this problem by assuming that $\Phi$ is of a seperable form, $\Phi (r,\theta,z) = R(r)\Theta(\theta)Z(z)$ in cylinderical coordinates.  Applying the Laplacian operator gives three ordinary differential equations subject to five constraints.
+
+\begin{subequations}
+Five boundary constraints for separated solutions
+\begin{align}
+       \Phi=0 &@ z=0 \\
+       \Phi=V(r) &@ z=L \\
+       \Phi\neq \pm\infty &@ r=0 \\
+       \Phi\rightarrow0 &@ r\rightarrow\infty \\
+       \Phi(r,0,z)&=\Phi(r,2\pi,z)
+\end{align}
+\end{subequations}
+
+Solving each of the three ordinary diferential equations and naming the constants in the style of Jackson section 3.7 we have
+\begin{equation}
+\frac{Z''(z)}{Z(z)}=k^2 \Rightarrow Z(z)=A_z\sinh kz + B_z \cosh kz
+\end{equation}
+Constraint 1 shows that $B_z = 0$.
+\begin{equation}
+\frac{\Theta''\theta)}{\Theta(\theta)}=-\nu^2 \Rightarrow \Theta(\theta)=A_\theta\sin \nu\theta + B_\theta \cos \nu\theta
+\end{equation}
+Constraint 5 shows that $\nu$ is a non-negative integer.
+\begin{equation}
+R''+\frac{R'}{r}+\left(k^2-\frac{\nu^2}{r^2}\right)R=0
+\end{equation}
+Here the primes denote derivative with respect to r.  Now, we'll follow Jackson and make the substitution $x=kr$ , $dx=k dr$
+\begin{equation}
+\ddot{R}+\frac{\dot{R}}{x}+\left(1-\frac{\nu^2}{x^2}\right)R=0 \Rightarrow R(x)=A_rJ_\nu(x)+B_rN_\nu(x)
+\end{equation}
+Constraint 3 shows that $B_r=0$, and by choosing the Bessel functions in the first place, constraint 4 is already satisfied.
+
+So putting the whole solution back together, and considering all possibilities for n and $\nu$.
+\begin{equation}
+\Phi=\sum_{\nu=0}^\infty\int_0^\infty J_\nu(kr)\sinh(kz)
+\left[A_{\nu}(k)\sin(\nu\theta)+B_{\nu}(k)\cos(\nu\theta)\right]\mathrm{d}k
+\end{equation}
+
+We are now left to calculate the coefficients $A_\nu(k)$ and $B_\nu(k)$.  Applying the boundary condition on V(r) on the top face, we get,
+\begin{equation}
+V(r)=\sum_{\nu}\int J_\nu(kr)\sinh(kL)
+\left[A_{\nu}(k)\sin(\nu\theta)+B_{\nu}(k)\cos(\nu\theta)\right]\mathrm{d}k
+\end{equation}
+
+
+The path naturally diverges here as the $A_\nu(k)$'s must be calculated separetely from the $B_\nu(k)$'s.  I'll calculate the $B_\nu(k)$'s here, and nothe that the $A_\nu(k)$'s can be calculted in a nearly identical way.  Multiplying both sides of the previous equation by $\cos(\nu'\theta)$ and integrating gives,
+\begin{equation}
+V(r)\int_0^{2\pi}\cos(\nu'\theta) \mathrm{d}\theta=
+\sum_{\nu}\int_0^\infty J_\nu(kr)\sinh(kL)
+\int_0^{2\pi}\left[A_{\nu}(k)\sin(\nu\theta)\cos(\nu'\theta)+B_{\nu}(k)\cos(\nu\theta)\cos(\nu'\theta)\right]\mathrm{d}\theta\mathrm{d}k
+\end{equation}
+
+By orthogonality of the sines and cosines, the $A_\nu(k)$ term is zero, and the $B_\nu(k)$ term colapses according to $\int_0^{2\pi}\cos(\nu\theta)\cos(\nu'\theta)\mathrm{d}\theta=\pi\delta_{\nu\nu'}\forall\nu\neq0$.  When $\nu=0$ the coeficient becomes $2\pi$ instead of just $\pi$.  To keep the functional form, I'll use the more common case, and keep that factor of two in mind for when we need it.
+\begin{equation}
+V(r)\int_0^{2\pi}\cos(\nu'\theta) \mathrm{d}\theta=
+\pi\int_0^\infty J_{\nu'}(kr)\sinh(kL)B_{\nu'}(k)\mathrm{d}k
+\end{equation}
+
+That defines the $B_{\nu}(k)$'s, but it remains to solve explicitly for them.  The trick here is to multiply both sides by $rJ_{\nu'}(k'r)$ and integrate over r.
+\begin{equation}
+\frac{1}{\pi}\int_0^{2\pi}\cos(\nu'\theta)\mathrm{d}\theta
+\int_0^\infty rV(r)J_{\nu'}(k'r)\mathrm{d}r
+=\int_0^\infty B_{\nu'}(k)\sinh(kL)\int_0^\infty rJ_{\nu'}(k'r)J_{\nu'}(kr) \mathrm{d}r\mathrm{d}k
+\end{equation}
+
+The integral over $r$ is the Hankel transformation so we can use the identity that Jackson lists as 3.108, $\int_0^\infty rJ_{\nu'}(k'r)J_{\nu'}(kr) \mathrm{d}r=\frac{1}{k}\delta(k'-k)$.
+\begin{equation}
+B_{\nu'}(k')=\frac{k'}{\pi \sinh(k'L)}\int_0^{2\pi}\cos(\nu'\theta)\mathrm{d}\theta\int_0^\infty rV(r)J_{\nu'}(k'r)\mathrm{d}r
+\end{equation}
+
+The theta integral in the preceeding equation goes to zero for all $\nu'$ except zero.  Since we're left only with $\nu'=0$ let's put that factor of two back in, and at the same time put in our particular form for V(r).
+\begin{equation}
+B_0(k)=\frac{Vk}{\sinh(kL)}\int_0^a r J_{\nu}(kr)\mathrm{d}r
+=\frac{Va}{\sinh(kL)}J_1(ka)
+\end{equation}
+
+So finally, we can put it back in to $\Phi$.
+\begin{equation}\boxed{
+\Phi=Va\int_0^\infty J_0(kr)J_1(ka)\frac{\sinh(kz)}{\sinh(kL)}\mathrm{d}k
+}\end{equation}
+
+If we want to make this look like it does in Jackson (which I don't really) we can make the substitution $\lambda=ka$.
+\begin{equation}
+\Phi=V\int_0^\infty J_0(\lambda \frac{r}{a})J_1(\lambda)\frac{\sinh(\lambda \frac{z}{a})}{\sinh(\lambda \frac{L	}{a})}\mathrm{d}\lambda
+\end{equation}
+
+\end{document}

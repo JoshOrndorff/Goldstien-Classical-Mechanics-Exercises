@@ -1,0 +1,59 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{J.D. Jackson Problem 3.13}
+\author{Josh Orndorff}
+\maketitle
+
+The proper Green function for this situation is given as equation3.125 in the text.
+\begin{equation}
+G(\mathbf{x},\mathbf{x'})=4\pi\sum_{l,m}\frac{Y_{lm}^*(\theta',\phi')Y_{lm}(\theta,\phi)}{(2l+1)\left(1-(\frac{a}{b})^{2l+1}\right)}
+\left(r_<^l-\frac{a^{2l+1}}{r_<^{l+1}}\right)\left(\frac{1}{r_<^{l+1}}-\frac{r_>^l}{b^{2l+1}}\right)
+\end{equation}
+
+Luckily, we have azimuthal symetry here, so $m=0$ and the the Green function simplifies.
+\begin{equation}
+G(\mathbf{r},\mathbf{r'})=\sum_{l}\frac{P_l(\cos\theta')P_l(\cos\theta)}{1-(\frac{a}{b})^{2l+1}}
+\left(r_<^l-\frac{a^{2l+1}}{r_<^{l+1}}\right)\left(\frac{1}{r_<^{l+1}}-\frac{r_>^l}{b^{2l+1}}\right)
+\end{equation}
+
+While we're at it let's calculate the normal derivative at each surface.
+At surface a:
+\begin{equation}
+\frac{\partial G(\mathbf{r},\mathbf{r'})}{\partial r'}=-\sum_{l}\frac{P_l(\cos\theta')P_l(\cos\theta)}{1-(\frac{a}{b})^{2l+1}}
+\left(\frac{1}{r^{l+1}}-\frac{r^l}{b^{2l+1}}\right)\left(la^{l-1}-\frac{(l+1)a^{2l+1}}{a^{l+2}}\right)
+\end{equation}
+At surface b:
+\begin{equation}
+\frac{\partial G(\mathbf{r},\mathbf{r'})}{\partial r'}=-\sum_{l}\frac{P_l(\cos\theta')P_l(\cos\theta)}{1-(\frac{a}{b})^{2l+1}}
+\left(r^l-\frac{a^{2l+1}}{r^{l+1}}\right)\left(\frac{-l-1}{b^{l+2}}-\frac{lb^{l-1}}{b^{2l+1}}\right)
+\end{equation}
+
+Equation 3.126 shows how to find the potential of a region given the charge density in the region and the appropriate green function for the boundaries.  In our case there is no charge density, and we have two bounding surfaces, so the equation becomes,
+\begin{equation}
+\Phi(\mathbf{r})=\frac{1}{4\pi}\left[\oint_{S_a}\Phi(\mathbf{x'})\frac{\partial G}{\partial r'}da'+ \oint_{S_b}\Phi(\mathbf{x'})\frac{\partial G}{\partial r'}da'\right]
+\end{equation}
+
+I'll substitute the previously calculated partial derivatives into this equation and evaluate the integrals at the appropriate surfaces
+\begin{equation}
+\Phi=\frac{V}{4\pi}\sum_{l}\frac{P_l(\cos\theta)}{1-(\frac{a}{b})^{2l+1}}\left[
+\left(\frac{1}{r^{l+1}}-\frac{r^l}{b^{2l+1}}\right)\left(la^{l-1}+\frac{(l+1)a^{2l+1}}{a^{l+2}}\right)a^2\int_0^{\pi/2}P_l(\cos\theta')\sin\theta'd\theta\int_0^{2\pi}d\phi 
+-\left(r^l-\frac{a^{2l+1}}{r^{l+1}}\right)\left(\frac{-l-1}{b^{l+2}}-\frac{lb^{l-1}}{b^{2l+1}}\right)b^2\int_{\pi/2}^\pi P_l(\cos\theta')\sin\theta'd\theta\int_0^{2\pi}d\phi
+\right]
+\end{equation}
+
+After some rearranging and defining $\gamma_l\equiv\int_0^{\pi/2}P_l(\cos\theta')\sin\theta'd\theta$ and noting that $\gamma_l\neq0$ only when l is odd, this becomes,
+\begin{equation}\boxed{
+\Phi =\frac{-V}{2}\sum_{l odd}\frac{P_l(\cos\theta)}{1-(\frac{a}{b})^{2l+1}}\gamma_l(2l+1)\left[
+\frac{1}{b^l}\left(r^l-\frac{a^{2l+1}}{r^{l+1}}\right)+a^{l+1}\left(\frac{1}{r^{l+1}}-\frac{r^l}{b^{2l+1}}\right)
+\right]
+}\end{equation}
+
+It's very likely that there is a sign mistake or two or ten in there, but I'm confident that everything else is correct.
+
+\end{document}

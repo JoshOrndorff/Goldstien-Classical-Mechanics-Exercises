@@ -1,0 +1,149 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{parskip}
+
+\begin{document}
+\title{J.D. Jackson Problem 1.6}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+\section{Parallel Plates}
+We begin by finding the electric field due to a single charged sheet. We will use a Gaussian pillbox straddling the sheet with cross-sectional area A.
+
+\begin{equation}
+\oint E_{sheet}\cdot dA = \frac{Q_{enc}}{\epsilon_0}
+\end{equation}
+
+The box's sides are parallel to the field, so there is no flux through them. The ends of the box are perpendicular, so the dot product becomes multiplication.
+\begin{equation}
+2E_{sheet}A = \sigma A / \epsilon_0
+\end{equation}
+
+\begin{equation}
+E_{sheet}=\frac{\sigma}{2\epsilon_0}
+\end{equation}
+
+Notice that the result is independent of distance away from the plate.  We can use this single sheet result to realize that the field between two equally and oppositely charged plates will simply be twice as strong because the fields add. It is also worth noting that the fields will cancel each other out outside of the capacitor.
+\begin{equation}
+E_{capacitor} = \frac{\sigma}{\epsilon_0}
+\end{equation}
+
+We can find the electric potential between the plates by integrating.
+\begin{equation}
+V=\int E\cdot dl
+\end{equation}
+
+Choosing a path perpendicular to both plates allows the integration to simply be multiplication.
+\begin{equation}
+V=Ed= \frac{\sigma d}{\epsilon_0}
+\end{equation}
+
+Calculating capacitance is just a matter of computing $C=Q/V$. But in this case it doesn't make any sense to calculate total capacitance because the charge, $Q$, is infinite. Instead we will calculate capacitance per unit area by replacing $Q$ with $\sigma$.
+\begin{equation}\boxed{
+\frac{C}{A}=\frac{\sigma}{V} = \frac{\epsilon_0}{d}
+}\end{equation}
+
+\section{Concentric Spheres}
+Let us first argue that the electric field inside a conducting sphere is identically zero regardless of the charge on the sphere. From spherical symmetry the field, if it exists at all, must be radial. Knowing that the field is strictly radial and itself spherically symmetric. That means we can take $E$ out of the Gauss's law integral. There is not charge enclosed in the sphere, which means that the $E$-field itself is zero.
+
+Knowing that the $E$-field inside a conducting sphere is zero, it is clear that the $E$-field between the two spheres is due only to the inner sphere.  So let's find the inner sphere's field from Gauss's Law using concentric spherical Gaussian surface.
+\begin{equation}
+\int E\cdot dA = \frac{Q_{enc}}{\epsilon_0}
+\end{equation}
+
+\begin{equation}
+4\pi r^2 E = \frac{Q}{\epsilon_0}
+\end{equation}
+
+\begin{equation}
+E=\frac{Q}{4\pi r^2 \epsilon_0}
+\end{equation}
+
+\begin{equation}
+V=\int E\cdot dl = \int_a^b \frac{Q}{4\pi r^2 \epsilon_0} \cdot dl
+\end{equation}
+
+Pulling constants out of the integral and choosing a radial integration path
+\begin{equation}
+V=\frac{Q}{4\pi \epsilon_0}\int_a^b\frac{dr}{r^2}
+\end{equation}
+
+Performing the integration provides the following (Note: I've accounted for the negative sign by switching the integration bounds).
+\begin{equation}
+V=\frac{Q}{4\pi \epsilon_0}\left[\frac{1}{r}\right]_b^a
+\end{equation}
+\begin{equation}
+V = \frac{Q}{4\pi \epsilon_0}\left[\frac{1}{a}-\frac{1}{b}\right]
+\end{equation}
+
+Finally, we can find the capacitance by taking $C=Q/V$.
+\begin{equation}\boxed{
+C=\frac{4\pi\epsilon_0}{\left[\frac{1}{a}-\frac{1}{b}\right]}
+}\end{equation}
+
+Or, if that fraction looks silly to you,
+\begin{equation}
+C=\frac{4\pi\epsilon_0 ab}{b-a}
+\end{equation}
+
+\section{Concentric Cylinders}
+The fact that the cylinders are long compared to their radii just means that we can ignore fringing fields that would exist because of finite length.  Considering this condition (and because I had the foresight to read part d) I'm going to first solve the problem of infinite cylinders, and only take a finite length in the final step.
+
+By the same logic used in section b, we can show that the $e$-field between the conductors is due solely to the inner conductor, so we'll find it by taking a concentric cylindrical Gaussian surface outside the inner conductor.
+\begin{equation}
+\int E\cdot dA = \frac{Q_{enc}}{\epsilon_0}
+\end{equation}
+
+There will be no contribution on the end caps of the cylindrical Gaussian surface because the electric field is radially outward, and the normal vector on said end caps points either up or down. On the other hand, the field is parallel to the sidewall's normal vector, and the dot product becomes simple multiplication.
+\begin{equation}
+2\pi rlE=\frac{\lambda l}{\epsilon_0}
+\end{equation}
+\begin{equation}
+E=\frac{\lambda}{2\pi r\epsilon_0}
+\end{equation}
+
+Again, we'll proceed to find the electric potential between the conductors
+\begin{equation}
+V=\int E\cdot dl = \int_a^b \frac{\lambda}{2\pi r \epsilon_0} \cdot dl
+\end{equation}
+
+Again, we'll pull out the constants and choose the radially outward integration path
+\begin{equation}
+V=\frac{\lambda}{2\pi \epsilon_0}\int_a^b \frac{dr}{r}
+\end{equation}
+\begin{equation}
+V=\frac{\lambda}{2\pi \epsilon_0}\left[\ln b - \ln a \right]=\frac{\lambda}{2\pi \epsilon_0}\ln\left(\frac{b}{a}\right)
+\end{equation}
+
+Much like we did in part a, we'll find the capacitance per unit length by transforming $C=Q/V$ into $C/L=\lambda/V$.
+\begin{equation}\label{c/l-cylinder}
+\frac{C}{L}=\frac{2\pi \epsilon_0}{\ln\left(\frac{b}{a}\right)}
+\end{equation}
+
+But the questions actually doesn't ask for an infinitely long capacitor. It asks for the finite capacitance of a finite capacitor. So we'll multiply length over to the other side to get the final result.
+\begin{equation}\boxed{
+C=\frac{2\pi \epsilon_0 L}{\ln\left(\frac{b}{a}\right)}
+}\end{equation}
+
+\section{Coaxial Cable with actual numbers}
+The question here is nothing more than an application of the cylindrical capacitor from the previous section. We'll start with equation \ref{c/l-cylinder} and solve it for the outer conductor's inner radius, $b$.
+\begin{equation}
+\ln\left(\frac{b}{a}\right)=\frac{2\pi\epsilon_0}{C/L}
+\end{equation}
+
+I've chosen to keep the cable's length $L$ in the denominator's denominator (or as I like to call it, the denomin-ominator) because the problem specifies $C/L$ as a single quantity.
+\begin{equation}\boxed{
+b=ae^{\frac{2\pi\epsilon_0}{C/L}}
+}\end{equation}
+
+The first capacitance yields $b=3.19$ mm or a diameter of 6.38 mm.
+
+The second capacitance yields $b=56.6$ km or a diameter of 113.2 km.
+
+Quite a difference.
+\end{document}

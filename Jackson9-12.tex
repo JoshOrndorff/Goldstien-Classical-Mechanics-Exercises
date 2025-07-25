@@ -1,0 +1,112 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{graphicx}
+
+\begin{document}
+\title{J.D. Jackson Problem 9.12}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+\section{Finding the multipole moments}
+We have to start by finding the charge density by setting its integral equal to the total charge.
+\begin{equation}
+Q=\iiint \rho r^2 \sin\theta dr d\theta d\phi
+\end{equation}
+\begin{equation}
+\frac{Q}{2\pi}=\rho\int_0^\pi \int_0^{R(\theta)}r^2 \sin\theta dr d\theta d\phi
+\end{equation}
+\begin{equation}
+\frac{Q}{2\pi}=\frac{\rho}{3}\int_0^\pi \left. r^3 \right|_0^{R(\theta)}\sin\theta d\theta
+\end{equation}
+\begin{equation}
+\frac{3Q}{2\pi}=\rho R_0^3\int_{0}^\pi (1+\beta P_2(\cos\theta))^3\sin\theta d\theta
+\end{equation}
+\begin{equation}
+\frac{3Q}{2\pi}=\rho R_0^3\int_{-1}^1 (1+\beta P_2x)^3 dx
+\end{equation}
+\begin{equation}
+\frac{12Q}{2\pi}=\rho R_0^3\int_{-1}^1 (2+3\beta x^2-\beta)^3 dx
+\end{equation}
+The integrand expands and integrates as follows
+
+\begin{equation}
+\rho=\frac{6Q}{\pi R_0^3}\left[
+(2-\beta)^3+\frac{1}{3}(9\beta(2-\beta)^2)+\frac{1}{5}(27\beta^2(2-\beta))+\frac{1}{7}27\beta^3
+\right]^{-1}
+\end{equation}
+Keeping only the lower order terms in beta,
+\begin{equation}
+\rho=\frac{15Q}{4\pi R_0^3(5+3\beta^2)}
+\end{equation}
+
+Now that we have the charge density we can find the multipole moments.
+\begin{equation}
+Q_{lm}=\int r^l Y_{lm}^* \rho d^3x
+\end{equation}
+\begin{equation}
+Q_{l0}=\frac{15Q}{4\pi R_0^3(5+3\beta^2)}\sqrt{\frac{2l+1}{4\pi}}\frac{2\pi}{3+l}\int_0^\pi \left.r^{3+l}\right|_0^{R(\theta)}\sin\theta P_l(\cos\theta) d\theta
+\end{equation}
+\begin{equation}
+Q_{l0}=\frac{15Q}{4\pi R_0^3(5+3\beta^2)}\sqrt{\frac{2l+1}{4\pi}}\frac{2\pi}{3+l}R_0^{3+l}\int_{-1}^1(1+\beta P_2(x))^{3+l}P_l(x) dx
+\end{equation}
+So, let's calculate the first few of these.
+\begin{equation}
+Q_{00}=\frac{15Q}{4\pi R_0^3(5+3\beta^2)}\sqrt{\frac{2 \cdot 1+1}{4\pi}}\frac{2\pi}{3+0}R_0^3\frac{2}{5}(3\beta^2+5)
+\end{equation}
+\begin{equation}
+Q_{00}=\frac{Q}{\sqrt{4\pi}}
+\end{equation}
+\begin{equation}
+Q_{10}=0
+\end{equation}
+\begin{equation}
+Q_{20}=\frac{15Q}{4\pi R_0^3(5+3\beta^2)}\sqrt{\frac{2\cdot 2+1}{4\pi}}\frac{2\pi}{3+2}R_0^5\frac{2\beta}{1001}(572\beta^2+1001)
+\end{equation}
+\begin{equation}
+Q_{20}=\sqrt{\frac{9}{20\pi}}QR_0^2\beta
+\end{equation}
+
+\section{Power per solid angle}
+We can find the power radiated by each multipole using equation 9.151.
+\begin{equation}
+\frac{\mathrm{d}P}{\mathrm{d}\Omega}=\frac{Z_0}{2k^2}\left|a(l,m)\right|^2\left|\mathbf{X}_{lm}\right|^2
+\end{equation}
+According to the footnote on page 431, $\mathbf{X}_{00}=0$, so we see that the monopole moment doesn't radiate. The $l=1$ term also does not radiate because its $a(1,0)$ term is zero.  The other $a$ terms will need to be calculated more rigorously. We'll use the long wavelength limit as described in equation 9.169. (Our $Q_{lm}'$'s are zero because there is no magnetization.
+\begin{equation}
+a(l,m)\approx \frac{ck^{l+2}}{i(2l+1)!!}\sqrt\frac{l+1}{l}Q_{lm}
+\end{equation}
+
+\begin{equation}
+a(2,0)\approx \frac{ck^4}{15i}\sqrt{3/2}\sqrt{\frac{9}{20\pi}}QR_0^2\beta
+\end{equation}
+
+\begin{equation}
+\left|a(2,0)\right|^2=\frac{3}{1000\pi}c^2k^8Q^2R_0^4\beta^2
+\end{equation}
+
+The table on page 437 give us the last remaining piece of the puzzle
+\begin{equation}
+\left|\mathbf{X}_{20}\right|^2=\frac{15}{8\pi}\sin^2\theta\cos^2\theta
+\end{equation}
+
+Putting all of this together, we see,
+\begin{equation}
+\frac{\mathrm{d}P}{\mathrm{d}\Omega}=\frac{9Z_0c^2k^6Q^2R_0^4\beta^2}{3200\pi^2}\sin^2\theta\cos^2\theta
+\end{equation}
+
+\section{Total Power}
+Total power is given by integrating the power per solid angle over all possible solid angles.
+
+\begin{equation}
+P=\frac{9Z_0c^2k^6Q^2R_0^4\beta^2}{1600\pi}\int_0^\pi  \sin^3\theta\cos^2\theta\,\mathrm{d}\theta
+\end{equation}
+
+\begin{equation}
+P=\frac{3Z_0c^2k^6Q^2R_0^4\beta^2}{2000\pi}
+\end{equation}
+
+\end{document}

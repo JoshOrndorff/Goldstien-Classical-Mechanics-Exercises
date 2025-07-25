@@ -1,0 +1,49 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{J.D. Jackson Problem 4.13}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+The premise of this problem is that introducing a dielectric into the region between the cylinders will change the energy stored in the electric field in that region.  Of course lifting the dielectric fluid will also give it gravitational potential energy.  The point where those two energies are equal to each other is the equilibrium.
+
+Taking the $z$-axis to be the axis of the concentric cylinders, the electric potential between the cylinders is a solution to Laplace's equation with no $\theta$ or $z$ dependence.  $\Phi=A \ln(r) +B$.  We can find $A$ and $B$ by using the boundary conditions $\Phi(a)=V$, and $\Phi(b)=0$.
+\begin{equation}
+\Phi(r)=V\left(\frac{\ln\frac{r}{b}}{\ln\frac{a}{b}}\right)
+\end{equation}
+
+Because the electric potential is the same both above the dielectric fluid and below it, we know that the electric field will be the same both above it and below it.
+\begin{equation}
+\mathbf{E}=\mathbf{E_0}=-\frac{\partial \Phi}{\partial r} \hat{r}=\frac{V}{r\ln\frac{a}{b}}\hat{r}
+\end{equation}
+
+According to Jackson's equation 4.92, we know that the change in energy by introducing a dielectric into such a cylindrical capacitor that would previously have been empty is given by
+\begin{align}
+W&=\frac{\epsilon_0-\epsilon}{2}\int_a^b \int_0^h \int_0^{2\pi} \mathbf{E}\cdot \mathbf{E_0}\, r \,\mathrm{d}\theta \,\mathrm{d}z \,\mathrm{d}r \\
+&=\frac{\pi(\epsilon_0-\epsilon)hV^2}{\left(\ln\frac{a}{b}\right)^2}\int_a^b \frac{1}{r}\,\mathrm{d}r \\
+&=\frac{\pi hV^2(\epsilon_0-\epsilon)\ln\frac{b}{a}}{\left(\ln\frac{a}{b}\right)^2} \\
+&=\frac{\pi hV^2(\epsilon_0-\epsilon)}{\ln\frac{a}{b}} \\
+\end{align}
+
+We can also write the gravitational potential energy that the dielectric fluid gains as
+\begin{equation}
+W=-\rho gVh =-\rho gh^2\pi(b^2-a^2)
+\end{equation}
+
+So now we can equate these two forms of the potential energy.
+\begin{align}
+\rho gh^2 \pi (b^2-a^2)&=\frac{-\pi h V^2 (\epsilon_0-\epsilon)}{\ln\frac{b}{a}} \\
+\rho gh (b^2-a^2) \ln\frac{b}{a}&= V^2 \epsilon_0 \left(\frac{\epsilon}{\epsilon_0}-1\right) \\
+\end{align}
+
+So if we use the definition of susceptibility, $\chi_e=\frac{\epsilon}{\epsilon_0}-1$, we get the desired result.
+\begin{equation}\boxed{
+\chi_e = \frac{(b^2-a^2) \rho gh \ln\frac{b}{a}}{\epsilon_0 V^2}
+}\end{equation}
+
+\end{document}

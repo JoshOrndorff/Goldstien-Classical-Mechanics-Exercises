@@ -1,0 +1,65 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{J.D. Jackson Problem 5.13}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+We'll set up our coordinate system so that the origin is at the center of the sphere, and the axis of rotation is along the positive $z$-axis.  Now we can write the surface current density.
+\begin{equation}
+\mathbf{K}=\sigma\mathbf{v}=\sigma\mathbf{\omega}\times\mathbf{r}=\sigma\omega r \sin\theta\mathbf{\hat{\phi}}
+\end{equation}
+
+Jackson shows us how to find the vector potential from a current density in equation (5.32), but he only lists the formula for 3D densities.  The cooresponding 2D and 1D equations are just as valid (see David J Griffiths, ``Introduction to Electrodynamics'').
+\begin{equation}
+\mathbf{A}=\frac{\mu_0}{4\pi}\int\frac{\mathbf{K}\,\mathrm{d}S}{|\mathbf{r}-\mathbf{r'}|}
+\end{equation}
+
+Substituting our form of $K$ and using the right hand rule to determine direction,
+\begin{equation}
+\mathbf{A}=\frac{\mu_0\sigma\omega}{4\pi}\iint\frac{a^3\sin^2\theta'}{|\mathbf{r}-\mathbf{r'}|}\,\mathrm{d}\theta'\,\mathrm{d}\phi'\,\mathbf{\hat{\phi'}}
+\end{equation}
+
+We can now use the expansion in spherical harmonics, equation (3.70), to replace that denominator
+\begin{equation}
+\mathbf{A}=\mu_0\sigma\omega\sum_{l,m}\frac{a^3r_<^lY_{lm}(\theta, \phi)}{r_>^{l+1}(2l+1)}\iint\sin^2\theta' \,Y^*_{lm}(\theta',\phi')\,\mathrm{d}\theta'\,\mathrm{d}\phi'\,\mathbf{\hat{\phi'}}
+\end{equation}
+
+The problem with the vector direction $\hat{\phi'}$ is that it is not a fixed direction, it depends on the vector value of $r$.  In order to resolve this, we must recast it into the fixed directions $\hat{\phi'}=\cos\phi'\hat{x}+\sin\phi'\hat{y}$.
+\begin{equation}
+\mathbf{A}=\mu_0\sigma\omega\sum_{l,m}\frac{a^3r_<^lY_{lm}(\theta, \phi)}{r_>^{l+1}(2l+1)}\iint\sin^2\theta' \,Y^*_{lm}(\theta',\phi')[\cos\phi'\hat{x}+\sin\phi'\hat{y}]\,\mathrm{d}\theta'\,\mathrm{d}\phi'
+\end{equation}
+
+Now we note the following useful identities
+\begin{align}
+\sin\theta'\sin\phi'&=-\sqrt{\frac{8\pi}{3}}Im(Y_{11}(\theta',\phi')) \\
+\sin\theta'\cos\phi'&=-\sqrt{\frac{8\pi}{3}}Re(Y_{11}(\theta',\phi'))
+\end{align}
+
+For brevity here, I'm only going to evaluate the $\hat{y}$ component because both integrals will be nearly identical.  We'll remember to throw that other one back in at the end.
+\begin{align}
+A_y&=-\sqrt{\frac{8\pi}{3}}\mu_0\sigma\omega\sum_{l,m}\frac{a^3r_<^l}{r_>^{l+1}(2l+1)}Im\left[Y_{lm}(\theta ,\phi)\iint Y_{11}(\theta',\phi') \,Y^*_{lm}(\theta',\phi')\sin\phi'\,\mathrm{d}\theta'\,\mathrm{d}\phi'\right] \\
+A_y&=-\sqrt{\frac{8\pi}{3}}\mu_0\sigma\omega\sum_{l,m}\frac{a^3r_<^l}{r_>^{l+1}(2l+1)}Im\left[Y_{lm}(\theta ,\phi)\delta_{l1}\delta_{m1}\right] \\
+A_y&=-\sqrt{\frac{8\pi}{3}}\mu_0\sigma\omega\frac{a^3r_<}{3r_>^2}\left[-\sqrt{\frac{3}{8\pi}}\sin\theta\sin\phi\right] \\
+A_y&=\mu_0\sigma\omega\frac{a^3r_<}{3r_>^2}\sin\theta\sin\phi \\
+\mathbf{A}&=\mu_0\sigma\omega\frac{a^3r_<}{3r_>^2}\sin\theta\,[\cos\phi \mathbf{\hat{x}}+\sin\phi \mathbf{\hat{y}}]\\
+\mathbf{A}&=\mu_0\sigma\omega\frac{a^3r_<}{3r_>^2}\sin\theta\,\mathbf{\hat{\phi}}\\
+\end{align}
+
+Now we can just substitute the appropriate values of $r_<$ and $r_>$ for inside and outside.
+\begin{align}
+\mathbf{A}_{inside}&=\frac{1}{3}\mu_0\sigma\omega ra\sin\theta\,\mathbf{\hat{\phi}} \\
+\mathbf{A}_{outside}&=\frac{1}{3}\mu_0\sigma\omega \frac{a^4}{r^2}\sin\theta\,\mathbf{\hat{\phi}}
+\end{align}
+
+Finally to calculate the $B$-field we can use $\mathbf{B}=\mathbf{\nabla}\times\mathbf{A}$.
+\begin{align}
+\mathbf{B}_{inside}&=\frac{2}{3}\mu_0 \sigma \omega a [\cos\theta \,\mathbf{\hat{r}}-\sin\theta\,\mathbf{\hat{\theta}}]\\
+\mathbf{B}_{outside}&=\frac{a^4}{3r^3}\mu_0\sigma\omega[2\cos\theta\,\mathbf{\hat{r}}+\sin\theta\,\mathbf{\hat{\theta}}]
+\end{align}
+\end{document}

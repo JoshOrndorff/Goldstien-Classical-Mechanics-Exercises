@@ -1,0 +1,100 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{parskip}
+
+\begin{document}
+\title{J.D. Jackson Problem 1.4}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+These problems will all follow similar methods using the integral form of Gauss's law. I will be thorough to begin with, but omit common steps in later portions of the problem.
+
+\section{Conductor}
+The entire problem is spherically symmetric, so the charge distribution will be as well (If it weren't nature would be arbitrarily preferring to gather charge in some spot that is equivalent to any other spot of equal radius). Knowing that the charge will be distributed symmetrically, we must consider at what radius it will gather. Gathering charge close to the sphere's center will have higher potential energy than gathering it far from the sphere's center. Following that logic to its limit, we conclude that the charge must be spread uniformly across the surface such that $\rho(r)\propto\delta(r-a)$.
+
+Imagine a concentric spherical Gaussian surface inside the conductor. There is no charge in the conductor's bulk and consequently no charge inside the surface.
+\begin{equation}
+\oint E_{in}\cdot dA=\frac{Q_{enc}}{\epsilon_0}
+\end{equation}
+
+\begin{equation}
+4\pi r^2 E_{in} = 0
+\end{equation}
+
+\begin{equation}\boxed{
+E_{in}=0
+}\end{equation}
+
+The same symmetries exist for a surface outside the sphere, so $E$ can again come out of the integral, but this time the entire charge $Q$ is inside the surface.
+\begin{equation}
+\oint E_{out}\cdot dA=\frac{Q_{enc}}{\epsilon_0}
+\end{equation}
+
+\begin{equation}
+4\pi r^2 E_{out} = \frac{Q}{\epsilon_0}
+\end{equation}
+
+\begin{equation}\boxed{
+E_{out} = \frac{Q}{4\pi\epsilon_0 r^2}
+}\end{equation}
+
+\section{Uniform Distribution}
+
+In this case the charge distribution is given by $\rho_{in}(r')=\frac{3Q}{4\pi R^3}$.
+
+\begin{equation}
+\oint E_{in}\cdot dA=\frac{Q_{enc}}{\epsilon_0}
+\end{equation}
+
+\begin{equation}
+4\pi r^2 E_{in} \epsilon_0=\iiint \frac{3Q}{4\pi R^3} \,\mathrm{d}V
+\end{equation}
+
+\begin{equation}
+4\pi r^2 E_{in} \epsilon_0=\frac{Qr^3}{R^3}
+\end{equation}
+
+\begin{equation}\boxed{
+E_{in}=\frac{Qr}{4\pi \epsilon_0 R^3}
+}\end{equation}
+
+As before, when we look outside the sphere, all of the charge is enclosed in it. so the electric field's functional form is the same.
+\begin{equation}\boxed{
+E_{out} = \frac{Q}{4\pi\epsilon_0 r^2}
+}\end{equation}
+
+\section{Polynomial Distribution}
+Since the third situation is less trivial than the others, it will be necessary to first write the charge density's functional form. It is clear from the outset that $\rho(r')\propto Qr'^n$. To make the units work, we can narrow the explicit form down further to $\rho(r')\propto Qr'^na^{-(n+3)}$. Finally we can find the proportionality constant by integrating the charge density everywhere.
+\begin{equation}
+\rho(r')=\frac{Q(n+3)r'^n}{4\pi a^{n+3}}
+\end{equation}
+
+To find the electric field inside the sphere, we'll begin as we have been
+\begin{equation}
+4\pi r^2 E_{in} \epsilon_0 = \iiint \rho(r')\,\mathrm{d}V
+\end{equation}
+
+Performing the angular equations yields a factor of $4\pi$ which can be canceled from both sides.
+\begin{equation}
+r^2E_{in}\epsilon_0 = \int_0^r \rho(r') r'^2 \,\mathrm{d}r'
+\end{equation}
+
+Substituting the charge distribution and rearranging slightly,
+\begin{equation}
+E_{in}=\frac{Q(n+3)}{4\pi\epsilon_0 a^{n+3}r^2}\int_0^r r'^{n+2} \,\mathrm{d}r
+\end{equation}
+
+\begin{equation}\boxed{
+E_{in}=\frac{Qr^{n+1}}{4\pi\epsilon_0 a^{n+3}}
+}\end{equation}
+
+And, as ever,
+\begin{equation}\boxed{
+E_{out} = \frac{Q}{4\pi\epsilon_0 r^2}
+}\end{equation}
+\end{document}
