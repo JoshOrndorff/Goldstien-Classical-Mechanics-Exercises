@@ -1,0 +1,38 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{Goldstein, Poole, and Safko Problem 3.29}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+We set up the coordinate system as shown with the z-axis coming out of the page.
+
+Goldstein dictates that we begin by calculating the cross product $\mathbf{L}\times\mathbf{A}$. So, using the definition of $\mathbf{A}$ from equation 3.82 we we have the following.
+
+\begin{equation}
+\mathbf{L}\times\mathbf{A} = \mathbf{L} \times (\mathbf{p}\times \mathbf{L}-mk\mathbf{\hat{r}}) \\
+\end{equation}
+\begin{equation}
+\mathbf{L}\times\mathbf{A} = \mathbf{L} \times (\mathbf{p} \times \mathbf{L}) - \mathbf{L} \times mk \mathbf{\hat{r}}
+\end{equation}
+Using the double curl vector identity, this becomes:
+\begin{equation}
+\mathbf{L}\times\mathbf{A} = \mathbf{p}(\mathbf{L} \cdot \mathbf{L}) - \mathbf{L}(\mathbf{L} \cdot \mathbf{p}) - \mathbf{L} \times mk \mathbf{\hat{r}}
+\end{equation}
+Each term in the previous equation simplifies. On the left side, $\mathbf{L}\times\mathbf{A}=-lA\mathbf{\hat{y}}$. In the first term on the right, $\mathbf{L} \cdot \mathbf{L} = l^2$. The second term is zero because $\mathbf{L}$ and $\mathbf{p}$ are perpendicular. And evaluating the cross product in the third term gives $\mathbf{L} \times mk \mathbf{\hat{r}} = mkl\mathbf{\hat{\theta}}$.
+\begin{equation}
+-lA\mathbf{\hat{y}} = \mathbf{p}l^2 - mkl \mathbf{\hat{\theta}}
+\end{equation}
+Now we'll rearrange and take the magnitude of both sides.
+\begin{equation}
+\left|\mathbf{p}+\frac{A}{l} \mathbf{\hat{y}}\right|=\frac{mk}{l}
+\end{equation}
+
+The form of the equation above shows that the hodograph traces out a circle of radius $mk/l$. The explicit addition of the $\mathbf{\hat{y}}$ term on the left shows that the circle is shifted along the y axis by a distance $A/l$.
+
+\end{document}

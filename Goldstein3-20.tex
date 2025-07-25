@@ -1,0 +1,94 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{Goldstein, Poole, and Safko Problem 3.20}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+\section{Period of Orbit}
+The dust in the solar system adds a term to the Kepler force, such that the total force on the planet is given by:
+\begin{equation}
+F=-mCr-\frac{GMm}{r^2}
+\end{equation}
+And consequently, the potential energy function is given by:
+\begin{equation}
+U=\frac{1}{2}mCr^2-\frac{GMm}{r}
+\end{equation}
+
+As Goldstein points out just before equation 3.58, for circular orbits, $T$ and $U$ are constant, and from the virial theorem, $E=U/2$.  It is a common mistake, however, to start directly from equation 3.58 which only applies for the unaltered Kepler potential. Instead, we'll go back the Bertrand's theorem (equation 3.41).
+\begin{equation}
+E=\frac{U}{2}=U+\frac{l^2}{2mr_0^2}
+\end{equation}
+\begin{equation}
+-\frac{U}{2}=\frac{l^2}{2mr_0^2}
+\end{equation}
+\begin{equation}
+U=-\frac{l^2}{mr_0^2}
+\end{equation}
+
+We want to express the potential energy in terms of $\dot{\theta}$ instead of $l$ so that we can calculate period, so substitute $l=mr_0^2\dot{\theta}$.
+\begin{equation}
+U=-mr_0^2\dot{\theta}^2
+\end{equation}
+
+And rearranging to solve for $\dot{\theta}$,
+\begin{equation}
+\dot{\theta}=\sqrt{-\frac{U}{mr_0^2}}
+\end{equation}
+
+Don't be alarmed by the negative sign under the square root because $U$ is itself negative making the entire quantity under the square root positive.
+\begin{equation}
+\dot{\theta}=\sqrt{\frac{1}{mr_0^2}\left[\frac{GMm}{r_0}-\frac{mC}{2}\right]}
+\end{equation}
+\begin{equation}
+\dot{\theta}=\sqrt{\frac{GM}{r_0^3}-\frac{C}{2}}
+\end{equation}
+
+Finally we can calculate period, $\tau$, from $\dot{\theta}$. Remember the angular velocity is the angle travelled out divided by the amount of time taken to travel it. $\dot{\theta}=\Delta\theta /\Delta t = 2\pi /\tau$.
+\begin{equation}\boxed{
+\tau=\frac{2\pi}{\sqrt{\frac{GM}{r_0^3}-\frac{C}{2}}}
+}\end{equation}
+
+\section{Frequency of Radial Oscillations}
+If the planet has energy slightly higher than that given in equation 3 above, it will oscillate slightly in the radial direction as it revolves in nearly circular orbits around the sun.  Goldstein has done most of the heavy lifting for us in section 3.6, so we'll use his results starting with equation 3.45.
+\begin{equation}
+u=u_0+a\cos\beta\theta
+\end{equation}
+
+$\beta$ is the number of radial oscillations that occur in a single orbital period which we'll now call $\tau_{orb}$.  Said another way, $\beta$ represents the ratio of the orbital and radial periods.
+\begin{equation}
+\tau_{orb}=\beta\tau_{rad} \quad\quad\quad \omega_{rad}=\frac{2\pi\beta}{\tau_{orb}}
+\end{equation}
+
+Beta's physical significance aside, our present task is to find its value which we can do with equation 3.46.
+\begin{equation}
+\beta^2=3+\left.\frac{r}{f}\frac{\mathrm{d}f}{\mathrm{d}r}\right|_{r=r_0}
+\end{equation}
+\begin{equation}
+\beta^2=3+\left.\frac{r}{-mcr-\frac{GMm}{r^2}}\left(-mC+\frac{2GMm}{r^3}\right)\right|_{r=r_0}
+\end{equation}
+\begin{equation}
+\beta^2=3+\frac{r_0}{-mcr_0-\frac{GMm}{r_0^2}}\left(-mC+\frac{2GMm}{r_0^3}\right)
+\end{equation}
+
+While the algebra necessary to simplify that expression is far from quick, I'll only briefly summarize it here.
+\begin{equation}
+\beta^2=3+\frac{-mCr_0+2\frac{GMm}{r_0^2}}{-mCr_0-\frac{GMm}{r_0^2}}
+\end{equation}
+\begin{equation}
+\beta=\sqrt{\frac{4C+\frac{GM}{r_0^3}}{C+\frac{GM}{r_0^3}}}
+\end{equation}
+
+Now that we have an expression for $beta$, we can return to equation 12.
+\begin{equation}
+\omega_{rad}=\sqrt{\frac{GM}{r_0^3}-\frac{C}{2}}\sqrt{\frac{4C+\frac{GM}{r_0^3}}{C+\frac{GM}{r_0^3}}}
+\end{equation}
+
+\section{Approximation by a Precessing Ellipse}
+
+\end{document}

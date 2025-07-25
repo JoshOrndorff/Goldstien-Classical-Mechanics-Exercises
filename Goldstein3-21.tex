@@ -1,0 +1,138 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\begin{document}
+\title{Goldstein, Poole, and Safko Problem 3.21}
+\author{Josh Orndorff \\ admin@joshorndorff.com}
+\maketitle
+
+\section{Finding the Orbit}
+To find the equation of orbit for this potential, we will solve the differential equation for orbits (equation 3.34) in certral forces.  But as prep work we need to write the potential and its first derivative in therms of the quantity $u=1/r$.
+\begin{equation}
+U\left(\frac{1}{u}\right)=-ku+hu^2
+\end{equation}
+\begin{equation}
+\frac{\mathrm{d}}{\mathrm{d}u} U\left(\frac{1}{u}\right)=-k+2hu
+\end{equation}
+
+Now we can solve equation 3.34.
+\begin{equation}
+\frac{\mathrm{d}^2}{\mathrm{d}\theta^2}u(\theta)+u(\theta)=\frac{-m}{l^2}\frac{\mathrm{d}}{\mathrm{d}u} U\left(\frac{1}{u}\right)
+\end{equation}
+
+Substituting our specific form of the potential energy function's first derivative into the differential we get,
+\begin{equation}
+\frac{\mathrm{d}^2}{\mathrm{d}\theta^2}u(\theta)+u(\theta)=\frac{-m}{l^2}\left(-k+2hu\right)
+\end{equation}
+\begin{equation}
+\frac{\mathrm{d}^2}{\mathrm{d}\theta^2}u(\theta)+u(\theta)=\frac{mk}{l^2}-\frac{2hm}{l^2}u(\theta)
+\end{equation}
+\begin{equation}
+\frac{\mathrm{d}^2}{\mathrm{d}\theta^2}u(\theta)+u(\theta)+\frac{2hm}{l^2}u(\theta)=\frac{mk}{l^2}
+\end{equation}
+\begin{equation}
+\frac{\mathrm{d}^2}{\mathrm{d}\theta^2}u(\theta)+\left(1+\frac{2hm}{l^2}\right)u(\theta)=\frac{mk}{l^2}
+\end{equation}
+
+The detailed method of solving the differential equation is outlined in moderate detail in appendix A, but at present, it suffices to say that the solution is the following.
+\begin{equation}
+u(\theta)=\frac{mk}{l^2\beta^2}(1+\epsilon\cos\beta(\theta-\theta_0))
+\end{equation}
+
+Where the unitless parameter $\beta$ is defined by
+\begin{equation}
+\beta^2=1+\frac{2hm}{l^2}
+\end{equation}
+
+This solution is the equation of a Kepler orbit in a reference frame where the angular coordinate is $\theta'=\beta(\theta-\theta_0)$.
+
+
+It is a precessing elipse where the factor $\beta$ accounts for the precession.
+\section{Finding Precession Rate}
+During one complete revolution, the coordinate $\theta'$ returns to its origin after an angle of $2\pi$.
+\begin{equation}
+\beta(\theta-\theta_0)=2\pi
+\end{equation}
+\begin{equation}
+\theta-\theta_0=\frac{2\pi}{\beta}
+\end{equation}
+\begin{equation}
+\theta-\theta_0=\frac{2\pi}{\sqrt{1+\frac{2hm}{l^2}}}
+\end{equation}
+
+If the additional term is much smaller than the Kepler term, the precession is slow, and in a single period, $\tau$, the original coordinate almost returns to its origin. It will be off by a correction proportional to the rate of precession.
+\begin{equation}
+\theta-\theta_0=2\pi-\dot{\Omega}\tau
+\end{equation}
+
+Setting equation 12 equal to equation 13, we can solve for the rate of precession.
+\begin{equation}
+\frac{2\pi}{\sqrt{1+\frac{2hm}{l^2}}}=2\pi-\dot{\Omega}\tau
+\end{equation}
+\begin{equation}
+\dot{\Omega}\tau=2\pi-\frac{2\pi}{\sqrt{1+\frac{2hm}{l^2}}}
+\end{equation}
+\begin{equation}
+\dot{\Omega}=\frac{2\pi}{\tau}\left(1-\frac{1}{\sqrt{1+\frac{2hm}{l^2}}}\right)
+\end{equation}
+
+Or, using an approximation,
+\begin{equation}
+\dot{\Omega}\approx\frac{2\pi}{\tau}\frac{mh}{l^2}
+\end{equation}
+
+
+\section{Mercury's $\eta$ Value}
+We'll can now use $l^2=mka(1-\epsilon^2)$ to obtain an expression for $\dot{\Omega}$ in terms of the parameter $\eta$.
+\begin{equation}
+\dot{\Omega}\approx\frac{2\pi}{\tau}\frac{mh}{l^2}=\frac{2\pi mh}{mka(1-\epsilon^2)\tau}
+\end{equation}
+\begin{equation}
+\dot{\Omega}\approx\frac{2\pi\eta}{(1-\epsilon^2)\tau}
+\end{equation}
+
+Or finally,
+\begin{equation}
+\eta\approx\frac{\dot{\Omega}(1-\epsilon^2)\tau}{2\pi}
+\end{equation}
+
+Plugging in the given values for Mercury,
+\begin{equation}
+\eta\approx\frac{(1.94\times10^{-6}/y)(1-0.206^2)(.24 y)}{2\pi}
+\end{equation}
+\begin{equation}
+\eta\approx7.09\times 10^{-8}
+\end{equation}
+
+\appendix
+\section{Solving the Differential Equation}
+We set out the solve the differential equation 7.
+\begin{equation}
+\frac{\mathrm{d}^2}{\mathrm{d}\theta^2}u(\theta)+\left(1+\frac{2hm}{l^2}\right)u(\theta)=\frac{mk}{l^2}
+\end{equation}
+
+In order to focus on the function $u(\theta)$ and its derivatives, let's redefine the constants such that the equation becomes.
+\begin{equation}
+\frac{\mathrm{d}^2}{\mathrm{d}\theta^2}u(\theta)+\beta^2u(\theta)=\gamma
+\end{equation}
+\begin{equation}
+\beta^2=1+\frac{2hm}{l^2}
+\quad\quad\quad
+\gamma=\frac{mk}{l^2}
+\end{equation}
+
+Any text on ordinary differential equation or Wolfram Alpha will tell you that the general solution of this differential equation is as follows.
+\begin{equation}
+u(\theta)=\frac{\gamma}{\beta^2}+c_1\sin(\beta\theta)+c_2\cos(\beta\theta)
+\end{equation}
+
+By choosing our coordinate system correctly, we can eliminate either the sine or the cosine but not both without loss of generality, and to stay consistan with Goldstein, we will keep the cosine.  The multiplicative constant is what the text has called eccentricity, $\epsilon$.  So, our solution is give by,
+\begin{equation}
+u(\theta)=\frac{mk}{l^2\beta^2}(1+\epsilon\cos\beta(\theta-\theta_0))
+\end{equation}
+
+\end{document}
